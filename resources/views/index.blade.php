@@ -31,6 +31,10 @@
         @include('hav')
 
         <div class="container">
+            @if(isset($landlord))
+
+
+                @if(Auth::user()->role == 'Landlord')
             <div class="col-md-8" id="mainBody">
                 <h4></h4>
                 <table>
@@ -54,7 +58,9 @@
                     </tbody>
                 </table>
             </div>
-            {{--<section class="row" id="mainBody">
+                @endif
+            @else
+            <section class="row" id="mainBody">
                 <div class="col-md-6" id="welcomeDiv">
                     <h4>Welcome to Diaspora Room Booking Web Application</h4>
                     <p style="color: #000000;">Diaspora Room Booking is a system built to assist students who are seeking for housing outside the Egerton University Compound. The process of booking hostels in the "diaspora"
@@ -122,7 +128,9 @@
                     <p style="color: #000000"><i class="fa fa-facebook"></i> : Tobin Karioki</p>
                     <p style="color: #000000"><i class="fa fa-google"> :  tobinkarioki@gmail.com</i></p>
                 </div>
-            </section>--}}
+            </section>
+
+            @endif
         </div>
     </div>
 

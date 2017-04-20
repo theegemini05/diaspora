@@ -247,16 +247,15 @@ Route::get('/right/tourMwangaza', function () {
     return view('tours/right/tourMwangaza');
 });
 
-Route::get('/registerHostelRooms', 'RegisterHostelRoomsController@index');
+Route::get('/registerhostelRooms', 'RegisterHostelRoomsController@index');
 Route::get('/registerHostelRooms', 'RegisterHostelRoomsController@create');
-Route::post('/registerHostelRooms', 'RegisterHostelRoomsController@store');
+Route::post('/registerhostelRooms', 'RegisterHostelRoomsController@store');
 
 
 
-Route::get('/registerHostel', 'RegisterHostelController@index');
-Route::get('/registerHostel', 'RegisterHostelController@create');
-Route::post('/registerHostel', 'RegisterHostelController@store');
-Route::get('/registerHostel', 'RegisterHostelController@hostel');
+Route::get('/registerhostel', 'RegisterHostelController@index');
+Route::post('/registerhostel', 'RegisterHostelController@store');
+//Route::get('/registerhostel', 'RegisterHostelController@hostel');
 
 Route::get('/book', 'BookController@index');
 Route::get('/book', 'BookController@create');

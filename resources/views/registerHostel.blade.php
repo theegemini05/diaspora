@@ -39,10 +39,19 @@
 
 <body>
 @include('hav')
+    @if (session('status'))
+        <div class="container" id="login" style="height: 50px;">
+            <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Success!</strong> <br>
+            {{ session('status') }}
+        </div>
+        </div>
+    @endif
 
 <div class="container" id="login" style="height: 470px;">
     <center><img src="{{url('images/hostel.jpg')}}"></center>
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('/registerHostel') }}">
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('/registerhostel') }}">
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('hname') ? ' has-error' : '' }}" id="input">

@@ -32,10 +32,10 @@
                                                 <li class="head"><h1 style="text-align: center; border-bottom: 2px solid #fed136;">landlord {{ Auth::user()->lname }} priviledges</h1></li>
                                             </ul>
                                             <ul class="col-md-6 list-unstyled places">
-                                                <li><a class="hders" href="{{url('/registerHostel')}}">Register Hostel</a></li>
+                                                <li><a class="hders" href="{{url('/registerhostel')}}">Register Hostel</a></li>
                                             </ul>
                                             <ul class="col-md-6 list-unstyled places">
-                                                <li><a class="hders" href="{{url('/registerHostelRooms')}}">Register Hostel_Room</a></li>
+                                                <li><a class="hders" href="{{url('/registerhostelrooms')}}">Register Hostel_Room</a></li>
                                             </ul>
                                         </div>
                                     </div>

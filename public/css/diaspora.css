@@ -241,12 +241,12 @@ div.carousel-inner {
 
 #welcomeDiv {
     background-color: rgba(242, 242, 242, 0.4);
-    box-shadow: 10px 10px 5px rgba(254, 209, 54, 0.4);
+    box-shadow: 5px 5px 5px rgba(254, 209, 54, 0.4);
 }
 
 #newsLetter {
     background-color: rgba(242, 242, 242, 0.4);
-    box-shadow: 10px 10px 5px rgba(254, 209, 54, 0.4);
+    box-shadow: 5px 5px 5px rgba(254, 209, 54, 0.4);
     padding-bottom: 30px;
 }
 
@@ -264,7 +264,7 @@ div.carousel-inner {
 
 #rightDiv {
     background-color: rgba(242, 242, 242, 0.4);
-    box-shadow: 10px 10px 5px rgba(254, 209, 54, 0.4);
+    box-shadow: 5px 5px 5px rgba(254, 209, 54, 0.4);
     margin-top: 60px;
 }
 

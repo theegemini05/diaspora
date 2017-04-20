@@ -29,13 +29,8 @@ class RegisterHostelController extends Controller
 
     public function index()
     {
-        $hostels = Hostel::all();
-        dd($hostels);
-    }
-
-    public function create()
-    {
-        return view('registerHostel');
+        //dd('hahah');
+        return view('registerhostel');
     }
 
     public function store(Request $request)
@@ -47,13 +42,9 @@ class RegisterHostelController extends Controller
         $hostel->save();
 
         //return success message to page
-        return redirect()->action('RegisterHostelController@create')
+        return redirect()->action('RegisterHostelController@index')
             ->with('status', $request->hname.' Successfully Registered to the System as Hostel.')
             ->with('newHostel', $hostel);
     }
 
-    public function hostel(){
-        $hostels = Hostel::where('landlord_id', Auth::user()->id);
-        return view('landlord', compact('hostels'));
-    }
 }
