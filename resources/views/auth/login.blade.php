@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" id="login">
+<div class="container" id="login" style="height: 420px;">
                     <center><img src="{{url('images/user.jpg')}}"></center><br><br>
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}

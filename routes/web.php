@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'HomeController@index');
+/*Route::get('/', 'HomeController@hostel');*/
+
 
 Route::get('/adminAhero', function () {
     return view('admin/adminAhero');
@@ -247,6 +247,21 @@ Route::get('/right/tourMwangaza', function () {
     return view('tours/right/tourMwangaza');
 });
 
+Route::get('/registerHostelRooms', 'RegisterHostelRoomsController@index');
+Route::get('/registerHostelRooms', 'RegisterHostelRoomsController@create');
+Route::post('/registerHostelRooms', 'RegisterHostelRoomsController@store');
+
+
+
+Route::get('/registerHostel', 'RegisterHostelController@index');
+Route::get('/registerHostel', 'RegisterHostelController@create');
+Route::post('/registerHostel', 'RegisterHostelController@store');
+Route::get('/registerHostel', 'RegisterHostelController@hostel');
+
+Route::get('/book', 'BookController@index');
+Route::get('/book', 'BookController@create');
+Route::post('/book', 'BookController@store');
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@hostel');

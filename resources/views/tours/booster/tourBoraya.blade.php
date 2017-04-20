@@ -104,7 +104,7 @@
                                         <button style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn"><i class="fa fa-street-view"></i> physical tour</button><br><br><br><br>
                                         <button style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn"><i class="fa fa-mobile"></i> contact management</button><br><br><br><br>
                                         <br><br><br>
-                                        <button style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn"><i class="fa fa-gavel"></i> book room one</button><br><br><br>
+                                        <a style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn" href="{{url('/book')}}"><i class="fa fa-gavel"></i> book room one</a><br><br><br>
                                     </div>
                                 </div>
                             </div>

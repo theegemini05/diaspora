@@ -31,7 +31,30 @@
         @include('hav')
 
         <div class="container">
-            <section class="row" id="mainBody">
+            <div class="col-md-8" id="mainBody">
+                <h4></h4>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Hostel Name</th>
+                        <th>Hostel Region</th>
+                        <th>Hostel Address</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($landlord as $hostel)
+                        <tr>
+                            <td>{{$hostel->hname}}</td>
+                            <td>{{$hostel->hregion}}</td>
+                            <td>{{$hostel->address}}</td>
+                            <td><a href="" class="btn btn-info">Edit</a> </td>
+                            <td><a href="" class="btn btn-danger">Delete</a> </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            {{--<section class="row" id="mainBody">
                 <div class="col-md-6" id="welcomeDiv">
                     <h4>Welcome to Diaspora Room Booking Web Application</h4>
                     <p style="color: #000000;">Diaspora Room Booking is a system built to assist students who are seeking for housing outside the Egerton University Compound. The process of booking hostels in the "diaspora"
@@ -99,7 +122,7 @@
                     <p style="color: #000000"><i class="fa fa-facebook"></i> : Tobin Karioki</p>
                     <p style="color: #000000"><i class="fa fa-google"> :  tobinkarioki@gmail.com</i></p>
                 </div>
-            </section>
+            </section>--}}
         </div>
     </div>
 
