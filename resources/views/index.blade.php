@@ -51,6 +51,7 @@
                             <td>{{$hostel->hname}}</td>
                             <td>{{$hostel->hregion}}</td>
                             <td>{{$hostel->address}}</td>
+                            <td><a href="{{url('/registerhostelrooms/'.$hostel->id.'/'.$hostel->hname)}}" class="btn btn-success">Add Room</a> </td>
                             <td><a href="" class="btn btn-info">Edit</a> </td>
                             <td><a href="" class="btn btn-danger">Delete</a> </td>
                         </tr>

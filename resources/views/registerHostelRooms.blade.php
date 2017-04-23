@@ -38,12 +38,18 @@
 </head>
 
 <body>
+<div id="main">
 @include('hav')
-
-<div class="container" id="login" style="height: 350px;">
+    <div class="container" id="intro">
+        <div class="col-lg-12">
+            <center><h2>Register Room to {{$hostel->hname}} Hostels</h2></center>
+        </div>
+    </div>
+<div class="container" id="login" style="height: 350px; margin-top: 50px;">
     <center><img src="{{url('images/hostel.jpg')}}"></center>
     <form class="form-horizontal" role="form" method="POST" action="{{ url('/registerHostelRooms') }}">
         {{ csrf_field() }}
+        <input type="hidden" value="{{$hostel->id}}">
 
         <div class="form-group{{ $errors->has('rno') ? ' has-error' : '' }}" id="input">
             <div class="col-md-6 hostel">
@@ -84,7 +90,7 @@
 <script src="{{url('js/jquery.js')}}"></script>
 <script src="{{url('js/bootstrap.min.js')}}"></script>
 <script src="{{url('js/diaspora.js')}}"></script>
-
+</div>
 </body>
 
 </html>

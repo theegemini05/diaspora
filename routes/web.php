@@ -247,9 +247,8 @@ Route::get('/right/tourMwangaza', function () {
     return view('tours/right/tourMwangaza');
 });
 
-Route::get('/registerhostelRooms', 'RegisterHostelRoomsController@index');
-Route::get('/registerHostelRooms', 'RegisterHostelRoomsController@create');
-Route::post('/registerhostelRooms', 'RegisterHostelRoomsController@store');
+Route::get('/registerhostelrooms/{hostel_id}/{hostel_name}', 'RegisterHostelRoomsController@create');
+Route::post('/registerhostelrooms', 'RegisterHostelRoomsController@store');
 
 
 

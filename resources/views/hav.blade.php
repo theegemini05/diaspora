@@ -31,11 +31,8 @@
                                             <ul class="col-lg-12 list-unstyled places">
                                                 <li class="head"><h1 style="text-align: center; border-bottom: 2px solid #fed136;">landlord {{ Auth::user()->lname }} priviledges</h1></li>
                                             </ul>
-                                            <ul class="col-md-6 list-unstyled places">
-                                                <li><a class="hders" href="{{url('/registerhostel')}}">Register Hostel</a></li>
-                                            </ul>
-                                            <ul class="col-md-6 list-unstyled places">
-                                                <li><a class="hders" href="{{url('/registerhostelrooms')}}">Register Hostel_Room</a></li>
+                                            <ul class="col-md-12 list-unstyled places">
+                                                <center><li><a class="hders" href="{{url('/registerhostel')}}">Register Hostel</a></li></center>
                                             </ul>
                                         </div>
                                     </div>
@@ -201,11 +198,11 @@
                                 <div class="yamm-content">
                                     <div class="row">
                                         <ul class="col-lg-12 list-unstyled places">
-                                            <a class="hders" style="text-decoration: none;" href="{{ url('/logout') }}"
+                                            <center><a class="hders" style="text-decoration: none;" href="{{ url('/logout') }}"
                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                 Logout {{ Auth::user()->lname }} <i class="fa fa-sign-out"></i>
-                                            </a>
+                                            </a></center>
 
                                             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                                 {{ csrf_field() }}

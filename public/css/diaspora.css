@@ -1,3 +1,8 @@
+html, body{
+    margin: 0;
+    height: 100%;
+}
+
 .navbar {
     background-color: transparent;
     background: transparent;
@@ -86,6 +91,12 @@ div.carousel-inner {
     margin: 0 auto;
     margin-top: 130px;
     box-shadow: 10px 10px 5px rgba(254, 209, 54, 0.4);
+}
+
+#intro {
+    color: #fed136;
+    margin: 0 auto;
+    margin-top: 130px;
 }
 
 #login img {

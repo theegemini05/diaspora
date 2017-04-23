@@ -10,20 +10,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\HostelRooms;
+use App\Hostel;
+use Illuminate\Support\Facades\View;
 
 class RegisterHostelRoomsController extends Controller
 {
-    public function index()
+    public function __construct()
     {
-        $hostelrooms = HostelRooms::all();
-        //dd($users);
-
-        return view('registerHostelRooms.all', compact('registerHostelRooms'));
+        $njokerio = Hostel::where("hregion","Njokerio");
+        View::share("njokerio", $njokerio);
+        $right = Hostel::where("hregion", "Right");
+        View::share("right", $right);
+        $booster = Hostel::where("hregion", "Booster");
+        View::share("booster", $booster);
+        $carwash = Hostel::where("hregion", "Carwash");
+        View::share("carwash", $carwash);
     }
 
-    public function create()
+    public function create($hostel_id, $hostel_name)
     {
-        return view('registerHostelRooms');
+        $hostel = Hostel::findorFail($hostel_id);
+        return view('registerHostelRooms', compact('hostel'));
     }
 
     public function store(Request $request)
