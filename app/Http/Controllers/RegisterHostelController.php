@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Hostel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Input;
 
 class RegisterHostelController extends Controller
 {
@@ -36,14 +37,22 @@ class RegisterHostelController extends Controller
     public function store(Request $request)
     {
         $request['landlord_id'] = Auth::user()->id;
-
         //save user to db
         $hostel = new Hostel($request->all());
+        if($request->hasFile('image')) {
+            $file = Input::file('image');
+
+            $name = $file('image')->getClientOriginalName();
+
+            $hostel->pics = $name;
+
+            $file->move(public_path().'/public/images/', $name);
+        }
         $hostel->save();
 
         //return success message to page
         return redirect()->action('RegisterHostelController@index')
-            ->with('status', $request->hname.' Successfully Registered to the System as Hostel.')
+            ->with('hname', $request->hname.' Successfully Registered to the System as Hostel.')
             ->with('newHostel', $hostel);
     }
 

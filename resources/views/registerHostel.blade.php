@@ -99,7 +99,7 @@
 
         <div class="form-group{{ $errors->has('pics') ? ' has-error' : '' }}" id="input">
             <div class="col-md-6 pics">
-                <input style="border: 1px solid #fed136;" id="pics" type="text" class="form-control" name="pics" value="{{ old('pics') }}" placeholder="Hostel Pics" required autofocus>
+                <input style="border: 1px solid #fed136;" id="pics" type="file" class="form-control" name="pics" value="{{ old('pics') }}"required autofocus>
 
                 @if ($errors->has('pics'))
                     <span class="help-block">

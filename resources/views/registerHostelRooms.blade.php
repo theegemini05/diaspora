@@ -47,13 +47,13 @@
     </div>
 <div class="container" id="login" style="height: 350px; margin-top: 50px;">
     <center><img src="{{url('images/hostel.jpg')}}"></center>
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('/registerHostelRooms') }}">
+    <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/registerhostelrooms') }}">
         {{ csrf_field() }}
-        <input type="hidden" value="{{$hostel->id}}">
+        <input type="hidden" value="{{$hostel->id}}" name="hostel_id">
 
         <div class="form-group{{ $errors->has('rno') ? ' has-error' : '' }}" id="input">
             <div class="col-md-6 hostel">
-                <input style="border: 1px solid #fed136;" id="name" type="int" class="form-control" name="rno" value="{{ old('rno') }}" placeholder="Enter Hostel Room Number" required autofocus>
+                <input style="border: 1px solid #fed136;" id="name" type="number" class="form-control" name="rno" value="{{ old('rno') }}" placeholder="Enter Hostel Room Number" required autofocus>
 
                 @if ($errors->has('rno'))
                     <span class="help-block">
@@ -65,7 +65,7 @@
 
         <div class="form-group{{ $errors->has('pics') ? ' has-error' : '' }}" id="input">
             <div class="col-md-6 pics">
-                <input style="border: 1px solid #fed136;" id="pics" type="text" class="form-control" name="pics" value="{{ old('pics') }}" placeholder="Hostel Pics" required autofocus>
+                <input style="border: 1px solid #fed136;" id="pics" type="file" class="form-control" name="pics" value="{{ old('pics') }}" placeholder="Hostel Pics" required autofocus>
 
                 @if ($errors->has('pics'))
                     <span class="help-block">

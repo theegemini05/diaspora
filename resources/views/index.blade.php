@@ -35,9 +35,9 @@
 
 
                 @if(Auth::user()->role == 'Landlord')
-            <div class="col-md-8" id="mainBody">
-                <h4></h4>
-                <table>
+            <div class="col-md-12" id="mainBody">
+                <center><h2>{{Auth::user()->lname}} Hostels</h2></center>
+                <center><table>
                     <thead>
                     <tr>
                         <th>Hostel Name</th>
@@ -51,13 +51,13 @@
                             <td>{{$hostel->hname}}</td>
                             <td>{{$hostel->hregion}}</td>
                             <td>{{$hostel->address}}</td>
-                            <td><a href="{{url('/registerhostelrooms/'.$hostel->id.'/'.$hostel->hname)}}" class="btn btn-success">Add Room</a> </td>
+                            <td><a href="{{url('/registerhostelrooms/'.$hostel->id)}}" class="btn btn-success">Add Room</a> </td>
                             <td><a href="" class="btn btn-info">Edit</a> </td>
                             <td><a href="" class="btn btn-danger">Delete</a> </td>
                         </tr>
                     @endforeach
                     </tbody>
-                </table>
+                </table></center>
             </div>
                 @endif
             @else
