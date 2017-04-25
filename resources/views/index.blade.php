@@ -31,7 +31,7 @@
         @include('hav')
 
         <div class="container">
-            @if(isset($landlord))
+            @if(isset($hostels))
 
 
                 @if(Auth::user()->role == 'Landlord')
@@ -46,7 +46,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($landlord as $hostel)
+                    @foreach($hostels as $hostel)
                         <tr>
                             <td>{{$hostel->hname}}</td>
                             <td>{{$hostel->hregion}}</td>

@@ -250,7 +250,7 @@ Route::get('/right/tourMwangaza', function () {
 Route::get('/registerhostelrooms/{hostel_id}', 'RegisterHostelRoomsController@create');
 Route::post('/registerhostelrooms', 'RegisterHostelRoomsController@store');
 
-
+Route::get('/rooms', 'RegisterHostelRoomsController@getImage');
 
 Route::get('/registerhostel', 'RegisterHostelController@index');
 Route::post('/registerhostel', 'RegisterHostelController@store');

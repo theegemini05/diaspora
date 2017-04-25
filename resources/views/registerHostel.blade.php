@@ -51,7 +51,7 @@
 
 <div class="container" id="login" style="height: 470px;">
     <center><img src="{{url('images/hostel.jpg')}}"></center>
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('/registerhostel') }}">
+    <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/registerhostel') }}">
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('hname') ? ' has-error' : '' }}" id="input">

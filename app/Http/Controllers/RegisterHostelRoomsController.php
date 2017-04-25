@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\HostelRooms;
 use App\Hostel;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
 
@@ -18,13 +19,13 @@ class RegisterHostelRoomsController extends Controller
 {
     public function __construct()
     {
-        $njokerio = Hostel::where("hregion","Njokerio");
+        $njokerio = Hostel::where("hregion", "Njokerio")->get();
         View::share("njokerio", $njokerio);
-        $right = Hostel::where("hregion", "Right");
+        $right = Hostel::where("hregion", "Right")->get();
         View::share("right", $right);
-        $booster = Hostel::where("hregion", "Booster");
+        $booster = Hostel::where("hregion", "Booster")->get();
         View::share("booster", $booster);
-        $carwash = Hostel::where("hregion", "Carwash");
+        $carwash = Hostel::where("hregion", "Carwash")->get();
         View::share("carwash", $carwash);
     }
 
@@ -42,14 +43,14 @@ class RegisterHostelRoomsController extends Controller
         ]);
         //save user to db
         $hostelrooms = new HostelRooms($request->all());
-        if($request->pics != null){
+        if ($request->pics != null) {
             $file = Input::file('pics');
 
             $originname = $file->getClientOriginalName();
 
             $filename = pathinfo($originname, PATHINFO_FILENAME);
             $extension = pathinfo($originname, PATHINFO_EXTENSION);
-            $name = $filename.'.'.time().'.'.$extension;
+            $name = $filename . '.' . time() . '.' . $extension;
 
             Input::file('pics')->move(public_path() . '/photos/', $name);
         }
@@ -58,7 +59,17 @@ class RegisterHostelRoomsController extends Controller
 
         //return success message to page
         return redirect()->action('RegisterHostelRoomsController@create', $request->hostel_id)
-            ->with('status', $request->rno.' Successfully Registered to the System as a room.')
+            ->with('rno', $request->rno . ' Successfully Registered to the System as a room.')
             ->with('newHostelRooms', $hostelrooms);
+    }
+
+    public function getImage()
+    {
+        $hostel = Hostel::findorFail(1);
+        //dd($hostel->id);
+        $hostel['rooms'] = HostelRooms::where('hostel_id', $hostel->id)->get();
+        /*return Response::json($hostel);*/
+        /*dd($hostel);*/
+        return view('room', compact('hostel'));
     }
 }

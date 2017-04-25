@@ -34,13 +34,14 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
         return view('index');
     }
 
     public function hostel(){
-        $landlord = Hostel::where('landlord_id', Auth::user()->id)->get();
+        $hostels = Hostel::where('landlord_id', Auth::user()->id)->get();
        /* dd($landlord);*/
-        return view('index', compact('landlord'));
+        return view('index', compact('hostels'));
     }
 }

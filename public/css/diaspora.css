@@ -107,7 +107,7 @@ div.carousel-inner {
     margin-bottom: 30px;
 }
 
-#login input[type="email"], [type="password"], [type="text"], [type="int"], [type="file"] {
+#login input[type="email"], [type="password"], [type="text"], [type="int"], [type="file"], [type="number"] {
     height: 50px;
     width: 300px;
     font-size: 18px;

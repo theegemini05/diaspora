@@ -18,13 +18,13 @@ class RegisterHostelController extends Controller
 {
     public function __construct()
     {
-        $njokerio = Hostel::where("hregion","Njokerio");
+        $njokerio = Hostel::where("hregion","Njokerio")->get();
         View::share("njokerio", $njokerio);
-        $right = Hostel::where("hregion", "Right");
+        $right = Hostel::where("hregion", "Right")->get();
         View::share("right", $right);
-        $booster = Hostel::where("hregion", "Booster");
+        $booster = Hostel::where("hregion", "Booster")->get();
         View::share("booster", $booster);
-        $carwash = Hostel::where("hregion", "Carwash");
+        $carwash = Hostel::where("hregion", "Carwash")->get();
         View::share("carwash", $carwash);
     }
 
@@ -37,17 +37,27 @@ class RegisterHostelController extends Controller
     public function store(Request $request)
     {
         $request['landlord_id'] = Auth::user()->id;
+
+        $this->validate($request, [
+            'hname' => 'required',
+            'hregion' => 'required',
+            'address' => 'required',
+            'pics' => 'mimes:jpeg,jpg,png|max:10000'
+        ]);
         //save user to db
         $hostel = new Hostel($request->all());
-        if($request->hasFile('image')) {
-            $file = Input::file('image');
+        if($request->pics != null){
+            $file = Input::file('pics');
 
-            $name = $file('image')->getClientOriginalName();
+            $originname = $file->getClientOriginalName();
 
-            $hostel->pics = $name;
+            $filename = pathinfo($originname, PATHINFO_FILENAME);
+            $extension = pathinfo($originname, PATHINFO_EXTENSION);
+            $name = $filename.'.'.time().'.'.$extension;
 
-            $file->move(public_path().'/public/images/', $name);
+            Input::file('pics')->move(public_path() . '/photos/', $name);
         }
+        $hostel['pics'] = $name;
         $hostel->save();
 
         //return success message to page

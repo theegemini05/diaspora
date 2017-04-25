@@ -53,7 +53,7 @@
 
         <div class="form-group{{ $errors->has('rno') ? ' has-error' : '' }}" id="input">
             <div class="col-md-6 hostel">
-                <input style="border: 1px solid #fed136;" id="name" type="number" class="form-control" name="rno" value="{{ old('rno') }}" placeholder="Enter Hostel Room Number" required autofocus>
+                <input style="border: 1px solid #fed136;height: 50px;" id="name" type="number" class="form-control" name="rno" value="{{ old('rno') }}" placeholder="Enter Room Number" required autofocus>
 
                 @if ($errors->has('rno'))
                     <span class="help-block">
