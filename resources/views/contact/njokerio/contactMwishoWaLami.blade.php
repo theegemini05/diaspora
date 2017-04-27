@@ -46,7 +46,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            @include('contactCarousel')
+            @include('hostelCarousel')
         </div>
 
         <div class="col-md-4" style="color: #fed136;">

@@ -17,7 +17,6 @@ class HomeController extends Controller
     public function __construct()
     {
        /* $this->middleware('auth');*/
-
         $njokerio = Hostel::where("hregion","Njokerio")->get();
         View::share("njokerio", $njokerio);
         $right = Hostel::where("hregion", "Right")->get();

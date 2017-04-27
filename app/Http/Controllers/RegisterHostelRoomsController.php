@@ -63,13 +63,30 @@ class RegisterHostelRoomsController extends Controller
             ->with('newHostelRooms', $hostelrooms);
     }
 
-    public function getImage()
+    public function tour($hostel_id)
     {
-        $hostel = Hostel::findorFail(1);
-        //dd($hostel->id);
-        $hostel['rooms'] = HostelRooms::where('hostel_id', $hostel->id)->get();
+        $hostel = Hostel::findorFail($hostel_id);
+        $hostel['rooms'] = HostelRooms::where('hostel_id', $hostel_id)->get();
         /*return Response::json($hostel);*/
         /*dd($hostel);*/
-        return view('room', compact('hostel'));
+        return view('tour', compact('hostel'));
+    }
+
+    public function about($hostel_id)
+    {
+        $hostel = Hostel::findorFail($hostel_id);
+        $hostel['rooms'] = HostelRooms::where('hostel_id', $hostel_id)->get();
+        /*return Response::json($hostel);*/
+        /*dd($hostel);*/
+        return view('about', compact('hostel'));
+    }
+
+    public function contact($hostel_id)
+    {
+        $hostel = Hostel::findorFail($hostel_id);
+        $hostel['rooms'] = HostelRooms::where('hostel_id', $hostel_id)->get();
+        /*return Response::json($hostel);*/
+        /*dd($hostel);*/
+        return view('contact', compact('hostel'));
     }
 }

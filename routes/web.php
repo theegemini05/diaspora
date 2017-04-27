@@ -250,14 +250,15 @@ Route::get('/right/tourMwangaza', function () {
 Route::get('/registerhostelrooms/{hostel_id}', 'RegisterHostelRoomsController@create');
 Route::post('/registerhostelrooms', 'RegisterHostelRoomsController@store');
 
-Route::get('/rooms', 'RegisterHostelRoomsController@getImage');
+Route::get('/tour/{hostel_id}', 'RegisterHostelRoomsController@tour');
+Route::get('/about/{hostel_id}', 'RegisterHostelRoomsController@about');
+Route::get('/contact/{hostel_id}', 'RegisterHostelRoomsController@contact');
 
 Route::get('/registerhostel', 'RegisterHostelController@index');
 Route::post('/registerhostel', 'RegisterHostelController@store');
 //Route::get('/registerhostel', 'RegisterHostelController@hostel');
 
-Route::get('/book', 'BookController@index');
-Route::get('/book', 'BookController@create');
+Route::get('/book/{hostel_id}/{room_id}', 'BookController@index');
 Route::post('/book', 'BookController@store');
 
 Auth::routes();

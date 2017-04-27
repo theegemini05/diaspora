@@ -34,12 +34,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header" style="color: #fff; border-bottom: 1px solid #fed136;">contact
-                    <small style="color: #fed136;"><b style="font-size: 30px;">a</b>hero <b style="font-size: 30px;">n</b>jokerio </small>
+                    <small style="color: #fed136;"><b style="font-size: 30px;">b</b>oraya <b style="font-size: 30px;">b</b>ooster </small>
                 </h1>
 
                 <ol class="breadcrumb" style="background-color: #222222">
                     <li><a href="/home" style="color: #fed136;">home</a></li>
-                    <li class="active" style="color: white">contact_ahero</li>
+                    <li class="active" style="color: white">contact_boraya</li>
                 </ol>
             </div>
         </div>
@@ -50,13 +50,13 @@
             </div>
 
             <div class="col-md-4" style="color: #fed136;">
-                <h3 style="border-bottom: 1px solid #fed136;"><b style="font-size: 30px">c</b>ontact <b style="font-size: 30px;">a</b>hero</h3>
+                <h3 style="border-bottom: 1px solid #fed136; color: #fed136;"><b style="font-size: 30px">c</b>ontact <b style="font-size: 30px;">b</b>oraya</h3>
                 <p>Egerton 867-40200</p>
                 <p><i class="fa fa-phone"></i>
                     <abbr title="Phone">P</abbr>: (+254) 700000000
                 </p>
                 <p><i class="fa fa-envelope-o"></i>
-                    <abbr title="Email Address">E</abbr>: <a style="color: #fed136;" href="mailto:ahero@gmail.com">ahero@gmail.com</a>
+                    <abbr title="Email Address">E</abbr>: <a style="color: #fed136;" href="mailto:boraya@gmail.com">boraya@gmail.com</a>
                 </p>
 
                 <ul class="list-unstyled list-inline list-social-icons">
@@ -68,7 +68,7 @@
                     <li><a style="color: #fed136;" href="{{url('#')}}"><i class="fa fa-whatsapp fa-2x"></i></a></li>
                 </ul>
             </div>
-        </div><br><br><br>
+        </div><br><br>
 
         <div class="row">
             <div class="col-md-8">
@@ -95,7 +95,7 @@
 
                     <div class="form-group control-block">
                         <div class="controls contact message">
-                            <textarea style="border: 1px solid #fed136;" rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message." maxlength="999" style="resize:none" placeholder="Write Down Your Message Here"></textarea>
+                            <textarea style="border: 1px solid #fed136; width: 750px;" rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message." maxlength="999" style="resize:none" placeholder="Write Down Your Message Here"></textarea>
                         </div>
                     </div>
                     <div id="success"></div>

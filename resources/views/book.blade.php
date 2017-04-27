@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta author="Tobin Karioki">
@@ -38,14 +38,26 @@
 </head>
 
 <body>
-@include('hav')
-
-<div class="container" id="login" style="height: 480px;">
-    <center><img src="{{url('images/user.jpg')}}"></center>
+<div id="main">
+    @include('hav')
+<div class="container" id="login" style="height: 260px; margin-top: 200px;">
+    <center><img src="{{url('images/hostel.jpg')}}" style="margin-bottom: 5px"></center>
     <form class="form-horizontal" role="form" method="POST" action="{{ url('/book') }}">
         {{ csrf_field() }}
+        <div class="alert alert-success" id="myAlert" style="display: none;">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ session('status') }}
+        </div>
+        <center><h2 style="margin-bottom: 20px; color: #000000;">Book Room {{$book->rno}} in {{$hostel->hname}} Hostels</h2></center>
+        <input type="hidden" value="{{$hostel->id}}" name="hostel_id">
+        <input type="hidden" value="{{Auth::user()->fname}}" name="fname">
+        <input type="hidden" value="{{Auth::user()->lname}}" name="lname">
+        <input type="hidden" value="{{Auth::user()->email}}" name="email">
+        <input type="hidden" value="{{Auth::user()->p_number}}" name="pnumber">
+        <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
+        <input type="hidden" value="{{$book->id}}" name="room_id">
 
-        <div class="form-group{{ $errors->has('fname') ? ' has-error' : '' }}" id="input">
+        {{--<div class="form-group{{ $errors->has('fname') ? ' has-error' : '' }}" id="input">
             <div class="col-md-6 name">
                 <input style="border: 1px solid #fed136;" id="name" type="text" class="form-control" name="fname" value="{{ old('fname') }}" placeholder="Enter Your First Name" required autofocus>
 
@@ -91,23 +103,24 @@
                     </span>
                 @endif
             </div>
-        </div>
+        </div>--}}
 
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
-                <button type="submit" class="btn" style="border: 2px solid #222222; background-color: #fed136; color: #222222; width: 160px;">
-                    book room <i class="fa fa-user-plus"></i>
+                <button type="submit" class="btn" style="border: 2px solid #222222; background-color: #fed136; color: #222222; width: 160px;" onclick="myAlert()">
+                    book room {{$book->rno}} <i class="fa fa-user-plus"></i>
                 </button>
             </div>
         </div>
     </form>
 </div>
+
 @include('sidenav')
 
 <script src="{{url('js/jquery.js')}}"></script>
 <script src="{{url('js/bootstrap.min.js')}}"></script>
 <script src="{{url('js/diaspora.js')}}"></script>
-
+</div>
 </body>
 
 </html>

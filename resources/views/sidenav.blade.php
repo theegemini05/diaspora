@@ -4,7 +4,7 @@
         <span class="fa fa-chevron-left"></span> back
     </a>
     @foreach($njokerio as $hostel)
-        <a href="{{url('/njokerio/hostel')}}">{{$hostel->hname}}</a>
+        <a href="{{url('/about/'.$hostel->id)}}">{{$hostel->hname}}</a>
     @endforeach
 </div>
 
@@ -15,7 +15,7 @@
         <span class="fa fa-chevron-left"></span>
     </a>
     @foreach($right as $hostel)
-        <a href="{{url('/right/hostel')}}">{{$hostel->hname}}</a>
+        <a href="{{url('/about/'.$hostel->id)}}">{{$hostel->hname}}</a>
     @endforeach
 </div>
 
@@ -26,7 +26,7 @@
         <span class="fa fa-chevron-left"></span>
     </a>
     @foreach($booster as $hostel)
-        <a href="{{url('/booster/hostel')}}">{{$hostel->hname}}</a>
+        <a href="{{url('/about/'.$hostel->id)}}">{{$hostel->hname}}</a>
     @endforeach
 </div>
 
@@ -37,7 +37,7 @@
         <span class="fa fa-chevron-left"></span>
     </a>
     @foreach($carwash as $hostel)
-        <a href="{{url('/carwash/hostel')}}">{{$hostel->hname}}</a>
+        <a href="{{url('/about/'.$hostel->id)}}">{{$hostel->hname}}</a>
     @endforeach
 </div>
 
@@ -48,7 +48,7 @@
         <span class="fa fa-chevron-left"></span>
     </a>
     @foreach($njokerio as $hostel)
-        <a href="{{url('/njokerio/hostel')}}">{{$hostel->hname}}</a>
+        <a href="{{url('/tour/'.$hostel->id)}}">{{$hostel->hname}}</a>
     @endforeach
 </div>
 
@@ -59,7 +59,7 @@
         <span class="fa fa-chevron-left"></span>
     </a>
     @foreach($right as $hostel)
-        <a href="{{url('/right/hostel')}}">{{$hostel->hname}}</a>
+        <a href="{{url('/tour/'.$hostel->id)}}">{{$hostel->hname}}</a>
     @endforeach
 </div>
 
@@ -70,7 +70,7 @@
         <span class="fa fa-chevron-left"></span>
     </a>
     @foreach($booster as $hostel)
-        <a href="{{url('/booster/hostel')}}">{{$hostel->hname}}</a>
+        <a href="{{url('/tour/'.$hostel->id)}}">{{$hostel->hname}}</a>
     @endforeach
 </div>
 
@@ -81,7 +81,7 @@
         <span class="fa fa-chevron-left"></span>
     </a>
     @foreach($carwash as $hostel)
-        <a href="{{url('/carwash/hostel')}}">{{$hostel->hname}}</a>
+        <a href="{{url('/tour/'.$hostel->id)}}">{{$hostel->hname}}</a>
     @endforeach
 </div>
 
@@ -92,7 +92,7 @@
         <span class="fa fa-chevron-left"></span>
     </a>
     @foreach($njokerio as $hostel)
-        <a href="{{url('/njokerio/hostel')}}">{{$hostel->hname}}</a>
+        <a href="{{url('/contact/'.$hostel->id)}}">{{$hostel->hname}}</a>
     @endforeach
 </div>
 
@@ -103,7 +103,7 @@
         <span class="fa fa-chevron-left"></span>
     </a>
     @foreach($right as $hostel)
-        <a href="{{url('/right/hostel')}}">{{$hostel->hname}}</a>
+        <a href="{{url('/contact/'.$hostel->id)}}">{{$hostel->hname}}</a>
     @endforeach
 </div>
 
@@ -114,7 +114,7 @@
         <span class="fa fa-chevron-left"></span>
     </a>
     @foreach($booster as $hostel)
-        <a href="{{url('/booster/hostel')}}">{{$hostel->hname}}</a>
+        <a href="{{url('/contact/'.$hostel->id)}}">{{$hostel->hname}}</a>
     @endforeach
 </div>
 
@@ -125,6 +125,6 @@
         <span class="fa fa-chevron-left"></span>
     </a>
     @foreach($carwash as $hostel)
-        <a href="{{url('/carwash/hostel')}}">{{$hostel->hname}}</a>
+        <a href="{{url('/contact/'.$hostel->id)}}">{{$hostel->hname}}</a>
     @endforeach
 </div>

@@ -36,12 +36,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header" style="border-bottom: 1px solid #fed136; color: #fff;">about
-
+                    <small style="color: #fed136"><b style="font-size: 30px;">{{$hostel->hname}} {{$hostel->hregion}}</b></small>
                 </h1>
 
                 <ol class="breadcrumb" style="background-color: #222222">
                     <li><a href="{{url('/home')}}" style="color: #fed136">home</a></li>
-                    <li class="active" style="color: white">about_boraya</li>
+                    <li class="active" style="color: white">about_{{$hostel->hname}}</li>
                 </ol>
             </div>
         </div>
@@ -54,9 +54,9 @@
             </div>
 
             <div class="col-md-4" style="color: #fff;">
-                <h2 style="border-bottom: 1px solid #fed136; font-size: larger; color: #fed136;"><b style="font-size: 30px;">a</b>bout <b style="font-size: 30px;">b</b>oraya <b style="font-size: 30px">b</b>ooster </h2>
-                <p>address</p>
-                <p>867-40200, egerton</p>
+                <h2 style="border-bottom: 1px solid #fed136; font-size: larger; color: #fed136;"><b style="font-size: 30px;">a</b>bout <b style="font-size: 25px;">{{$hostel->hname}} {{$hostel->hregion}}</b> </h2>
+                <p>{{$hostel->address}}</p>
+                <p><small>Some Text</small></p>
             </div>
         </div>
 
@@ -70,7 +70,7 @@
                     <img class="img-responsive" style="width:160px;height:170px;float:left;" src="{{url('images/(3).jpg')}}" alt="landlord/landlady">
                     <div class="caption">
                         <h3>name name<br>
-                            <small>landlord/landlady</small>
+                            <small>landlord</small>
                         </h3>
 
                         <p><i class="fa fa-phone"></i>
@@ -81,15 +81,6 @@
                         <p style="text-align:right;"><i class="fa fa-envelope-o"></i>
                             <abbr title="Email">E</abbr>: <a href="mailto:landlord@gmail.com" style="color: #fed136">landlord@gmail.com</a>
                         </p><hr>
-
-                        <ul class="list-unstyled list-inline list-social-icons">
-                            <li><a href="{{url('#')}}"><i class="fa fa-2x fa-facebook-square" style="color: #222222"></i></a></li>
-                            <li><a href="{{url('#')}}"><i class="fa fa-2x fa-twitter-square" style="color: #222222"></i></a></li>
-                            <li><a href="{{url('#')}}"><i class="fa fa-2x fa-google-plus-square" style="color: #222222"></i></a></li>
-                            <li><a href="{{url('#')}}"><i class="fa fa-2x fa-instagram" style="color: #222222"></i></a></li>
-                            <li><a href="{{url('#')}}"><i class="fa fa-2x fa-snapchat" style="color: #222222"></i></a></li>
-                            <li><a href="{{url('#')}}"><i class="fa fa-2x fa-whatsapp" style="color: #222222"></i></a></li>
-                        </ul>
                     </div>
                 </div>
             </div>

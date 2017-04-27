@@ -56,7 +56,7 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        @include('contactCarousel')
+                        @include('hostelCarousel')
                     </div>
                 </div>
 
@@ -94,7 +94,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">o</b>ne</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -113,7 +113,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">t</b>wo</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -132,7 +132,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">t</b>hree</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -151,7 +151,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">f</b>our</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -170,7 +170,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">f</b>ive</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -190,7 +190,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">s</b>ix</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -209,7 +209,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">s</b>even</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -228,7 +228,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">e</b>ight</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -247,7 +247,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">n</b>ine</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -266,7 +266,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">t</b>en</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -285,7 +285,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">e</b>leven</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -304,7 +304,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">t</b>welve</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -323,7 +323,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">t</b>hirteen</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -342,7 +342,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">f</b>ourteen</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -361,7 +361,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">f</b>ifteen</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -381,7 +381,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">s</b>ixteen</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -400,7 +400,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">s</b>eventeen</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -419,7 +419,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">e</b>ighteen</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -438,7 +438,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">n</b>ineteen</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
@@ -457,7 +457,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h4><b style="font-size: 30px;">r</b>oom <b style="font-size: 30px;">t</b>wenty</h4>
-                                        @include('contactCarousel')
+                                        @include('hostelCarousel')
                                     </div>
 
                                     <div class="col-lg-3">
