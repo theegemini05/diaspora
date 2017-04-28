@@ -51,7 +51,11 @@
                             <td>{{$hostel->hname}}</td>
                             <td>{{$hostel->hregion}}</td>
                             <td>{{$hostel->address}}</td>
-                            <td><a href="{{url('/registerhostelrooms/'.$hostel->id)}}" class="btn btn-success">Add Room</a> </td>
+                            <td><a {{--@if($hostel->hregion == "Njokerio")--}}
+                                   href="{{url('/registerhostelrooms/'.$hostel->id)}}"
+                                  {{-- @else--}}
+                                           {{--href="{{url('1')}}"--}}
+                                  {{-- @endif --}}class="btn btn-success">Add Room</a> </td>
                             <td><a href="" class="btn btn-info">Edit</a> </td>
                             <td><a href="" class="btn btn-danger">Delete</a> </td>
                         </tr>

@@ -40,7 +40,9 @@ class HomeController extends Controller
 
     public function hostel(){
         $hostels = Hostel::where('landlord_id', Auth::user()->id)->get();
-       /* dd($landlord);*/
+        /*$region = Hostel::where('id', 1)->get();
+        $reg = $region['hname'];
+        dd($reg)*/;
         return view('index', compact('hostels'));
     }
 }

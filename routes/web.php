@@ -249,6 +249,12 @@ Route::get('/right/tourMwangaza', function () {
 
 Route::get('/registerhostelrooms/{hostel_id}', 'RegisterHostelRoomsController@create');
 Route::post('/registerhostelrooms', 'RegisterHostelRoomsController@store');
+/*Route::get('/registerhostelroomscarwash/{hostel_id}', 'RegisterHostelRoomsCarwashController@create');
+Route::post('/registerhostelroomscarwash', 'RegisterHostelRoomsCarwashController@store');
+Route::get('/registerhostelroomsnjokerio/{hostel_id}', 'RegisterHostelRoomsNjokerioController@create');
+Route::post('/registerhostelroomsnjokerio', 'RegisterHostelRoomsNjokerioController@store');
+Route::get('/registerhostelroomsright/{hostel_id}', 'RegisterHostelRoomsRightController@create');
+Route::post('/registerhostelroomsright', 'RegisterHostelRoomsRightController@store');*/
 
 Route::get('/tour/{hostel_id}', 'RegisterHostelRoomsController@tour');
 Route::get('/about/{hostel_id}', 'RegisterHostelRoomsController@about');

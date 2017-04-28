@@ -50,7 +50,6 @@
     <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/registerhostelrooms') }}">
         {{ csrf_field() }}
         <input type="hidden" value="{{$hostel->id}}" name="hostel_id">
-
         <div class="form-group{{ $errors->has('rno') ? ' has-error' : '' }}" id="input">
             <div class="col-md-6 hostel">
                 <input style="border: 1px solid #fed136;height: 50px;" id="name" type="number" class="form-control" name="rno" value="{{ old('rno') }}" placeholder="Enter Room Number" required autofocus>

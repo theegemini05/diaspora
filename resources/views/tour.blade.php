@@ -68,19 +68,22 @@
 
             <div class="col-lg-12">
                 <ul class="nav nav-tabs nav-justified" id="myTab">
+                    <?php $count = 0;?>
                     @foreach($hostel->rooms as $room)
-                        @if($room->id==1)
+                        @if($count == 0)
                             <li class="active"><a href="#{{$hostel->hname}}{{$room->rno}}" data-toggle="tab"><i class="fa fa-bed"></i> <b style="font-size: 20px;">room</b>{{$room->rno}}</a></li>
                         @else
                             <li><a href="#{{$hostel->hname}}{{$room->rno}}" data-toggle="tab"><i class="fa fa-bed"></i> <b style="font-size: 20px;">room</b>{{$room->rno}}</a></li>
                         @endif
+                        <?php $count++?>
                     @endforeach
                 </ul>
 
 
                 <div class="tab-content" id="myTabContent">
-                    @foreach($hostel->rooms as $room)
-                        @if($room->id==1)
+                    <?php $count2 = 0;?>
+                @foreach($hostel->rooms as $room)
+                        @if($count2 == 0)
                             <div class="tab-pane active fade in" id="{{$hostel->hname}}{{$room->rno}}">
                         @else
                             <div class="tab-pane fade in" id="{{$hostel->hname}}{{$room->rno}}">
@@ -103,7 +106,8 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    <?php $count2++?>
+                @endforeach
                 </div>
             </div>
         </div><br><br><br>
