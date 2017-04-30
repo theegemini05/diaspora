@@ -53,7 +53,12 @@
     <center><img src="{{url('images/hostel.jpg')}}"></center>
     <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/registerhostel') }}">
         {{ csrf_field() }}
-
+        @if (session('status'))
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><center>{{ session('status') }}</center></strong>
+            </div>
+        @endif
         <div class="form-group{{ $errors->has('hname') ? ' has-error' : '' }}" id="input">
             <div class="col-md-6 hostel">
                 <input style="border: 1px solid #fed136;" id="name" type="text" class="form-control" name="hname" value="{{ old('fname') }}" placeholder="Enter Hostel Name" required autofocus>

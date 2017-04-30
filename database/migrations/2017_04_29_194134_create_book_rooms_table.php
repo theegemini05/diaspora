@@ -21,10 +21,14 @@ class CreateBookRoomsTable extends Migration
             $table->string('pnumber');
             $table->integer('user_id')->unsigned();
             $table->integer('room_id')->unsigned();
+            $table->integer('hostel_id')->unsigned();
+            $table->integer('landlord_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('room_id')->references('id')->on('hostel_rooms');
+            $table->foreign('hostel_id')->references('id')->on('hostels');
+            $table->foreign('landlord_id')->references('id')->on('users');
         });
     }
 

@@ -62,8 +62,7 @@ class RegisterHostelController extends Controller
 
         //return success message to page
         return redirect()->action('RegisterHostelController@index')
-            ->with('hname', $request->hname.' Successfully Registered to the System as Hostel.')
-            ->with('newHostel', $hostel);
+            ->with('status', $request->hname.' Successfully Registered to the System as Hostel.');
     }
 
 }

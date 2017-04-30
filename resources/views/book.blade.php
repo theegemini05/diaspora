@@ -44,10 +44,13 @@
     <center><img src="{{url('images/hostel.jpg')}}" style="margin-bottom: 5px"></center>
     <form class="form-horizontal" role="form" method="POST" action="{{ url('/book') }}">
         {{ csrf_field() }}
-        <div class="alert alert-success" id="myAlert" style="display: none;">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {{ session('status') }}
-        </div>
+
+        @if (session('status'))
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><center>{{ session('status') }}</center></strong>
+            </div>
+        @endif
         <center><h2 style="margin-bottom: 20px; color: #000000;">Book Room {{$book->rno}} in {{$hostel->hname}} Hostels</h2></center>
         <input type="hidden" value="{{$hostel->id}}" name="hostel_id">
         <input type="hidden" value="{{Auth::user()->fname}}" name="fname">
@@ -56,6 +59,7 @@
         <input type="hidden" value="{{Auth::user()->p_number}}" name="pnumber">
         <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
         <input type="hidden" value="{{$book->id}}" name="room_id">
+        <input type="hidden" value="{{$hostel->landlord_id}}" name="landlord_id">
 
         {{--<div class="form-group{{ $errors->has('fname') ? ' has-error' : '' }}" id="input">
             <div class="col-md-6 name">
@@ -107,7 +111,7 @@
 
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
-                <button type="submit" class="btn" style="border: 2px solid #222222; background-color: #fed136; color: #222222; width: 160px;" onclick="myAlert()">
+                <button type="submit" class="btn" style="border: 2px solid #222222; background-color: #fed136; color: #222222; width: 160px;">
                     book room {{$book->rno}} <i class="fa fa-user-plus"></i>
                 </button>
             </div>

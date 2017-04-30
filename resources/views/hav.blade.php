@@ -153,15 +153,24 @@
                 @else
                     <li class="dropdown yamm-fw">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            notifications <i class="fa fa-ravelry"></i>
+                            notifications <i class="fa fa-comments"></i>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 <div class="yamm-content">
                                     <div class="row">
+                                        @if(!Auth::guest() && Auth::user()->role == "Landlord")
+                                        @foreach($get as $notify)
                                         <ul class="col-lg-12 list-unstyled places">
+                                            @if($notify->landlord_id == Auth::user()->id)
+                                                <center><li><a class="hders" style="font-size: 15px;" href="{{url('/home/ackbooking/'.$notify->hostel_id.'/'.$notify->room_id.'/'.$notify->id)}}">{{$notify->fname}} {{$notify->lname}} sent a booking request</a></li></center>
+                                                @else
+                                                <li></li>
+                                                @endif
                                         </ul>
+                                            @endforeach
+                                            @endif
                                     </div>
                                 </div>
                             </li>

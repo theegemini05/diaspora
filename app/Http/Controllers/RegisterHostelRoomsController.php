@@ -59,8 +59,7 @@ class RegisterHostelRoomsController extends Controller
 
         //return success message to page
         return redirect()->action('RegisterHostelRoomsController@create', $request->hostel_id)
-            ->with('rno', $request->rno . ' Successfully Registered to the System as a room.')
-            ->with('newHostelRooms', $hostelrooms);
+            ->with('status', $request->rno . ' Successfully Registered to the System as a room.');
     }
 
     public function tour($hostel_id)

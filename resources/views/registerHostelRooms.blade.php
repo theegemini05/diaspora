@@ -45,10 +45,16 @@
             <center><h2>Register Room to {{$hostel->hname}} Hostels</h2></center>
         </div>
     </div>
-<div class="container" id="login" style="height: 350px; margin-top: 50px;">
+<div class="container" id="login" style="height: 380px; margin-top: 50px;">
     <center><img src="{{url('images/hostel.jpg')}}"></center>
     <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/registerhostelrooms') }}">
         {{ csrf_field() }}
+        @if (session('status'))
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><center>{{ session('status') }}</center></strong>
+            </div>
+        @endif
         <input type="hidden" value="{{$hostel->id}}" name="hostel_id">
         <div class="form-group{{ $errors->has('rno') ? ' has-error' : '' }}" id="input">
             <div class="col-md-6 hostel">

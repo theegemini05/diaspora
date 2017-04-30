@@ -267,6 +267,11 @@ Route::post('/registerhostel', 'RegisterHostelController@store');
 Route::get('/book/{hostel_id}/{room_id}', 'BookController@index');
 Route::post('/book', 'BookController@store');
 
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@hostel');
+Route::get('/home/ackbooking/{hostel_id}/{room_id}/{book_id}', 'HomeController@acknowledge');
+
+

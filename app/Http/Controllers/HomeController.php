@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\BookRoom;
+use App\HostelRooms;
 use Illuminate\Http\Request;
 use App\Hostel;
 use Illuminate\Support\Facades\View;
@@ -25,6 +27,9 @@ class HomeController extends Controller
         View::share("booster", $booster);
         $carwash = Hostel::where("hregion", "Carwash")->get();
         View::share("carwash", $carwash);
+        /*$get =  BookRoom::where('landlord_id', Auth::user()->id)->get();
+        dd($get);
+        View::share("get", $get);*/
     }
 
     /**
@@ -40,9 +45,17 @@ class HomeController extends Controller
 
     public function hostel(){
         $hostels = Hostel::where('landlord_id', Auth::user()->id)->get();
-        /*$region = Hostel::where('id', 1)->get();
-        $reg = $region['hname'];
-        dd($reg)*/;
-        return view('index', compact('hostels'));
+        $get =  BookRoom::where('landlord_id', Auth::user()->id)->get();
+        /*dd($get);*/
+        return view('index', compact('hostels', 'get'));
+    }
+
+    public function acknowledge($hostel_id, $room_id, $book_id){
+        $hostels = Hostel::where('landlord_id', Auth::user()->id)->get();
+        $get =  BookRoom::where('landlord_id', Auth::user()->id)->get();
+        $hostel = Hostel::findorFail($hostel_id);
+        $gets =  HostelRooms::findorFail($room_id);
+        $ret = BookRoom::findorFail($book_id);
+        return view('ackBooking', compact('hostels', 'hostel', 'gets','ret', 'get'));
     }
 }

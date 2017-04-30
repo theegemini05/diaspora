@@ -52,11 +52,11 @@ class BookController extends Controller
         $room['pnumber'] = Auth::user()->p_number;
         $room['user_id'] = Auth::user()->id;
         $room['room_id'] = $request->room_id;
+        $room['hostel_id'] = $request->hostel_id;
         $room->save();
 
         //return success message to page
         return redirect()->action('BookController@index', [$request->hostel_id, $request->room_id])
-            ->with('status', $request->fname.' '.$request->lname.' successfully submitted booking_request to the system.')
-            ->with('newBookRoom', $room);
+            ->with('status', $request->fname.' '.$request->lname.' successfully submitted booking_request to the system.');
     }
 }

@@ -12,6 +12,6 @@ class Hostel extends Model
      * @var array
      */
     protected $fillable = [
-        'landlord_id', 'hname', 'address', 'hregion', 'pics'
+        'landlord_id', 'hname', 'address', 'hregion', 'pics', 'status'
     ];
 }

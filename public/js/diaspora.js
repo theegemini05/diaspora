@@ -120,6 +120,3 @@ function closeNavContactCarWash() {
     document.getElementById("main").style.marginLeft = "0";
     document.body.style.backgroundColor = "white";
 }
-function myAlert() {
-    document.getElementById("myAlert").style.display = "block";
-}
