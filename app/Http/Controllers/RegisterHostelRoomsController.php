@@ -8,9 +8,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use App\HostelRooms;
 use App\Hostel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
@@ -75,17 +77,21 @@ class RegisterHostelRoomsController extends Controller
     {
         $hostel = Hostel::findorFail($hostel_id);
         $hostel['rooms'] = HostelRooms::where('hostel_id', $hostel_id)->get();
+        $get = $hostel['landlord_id'];
+        $ret = User::findorFail($get);
         /*return Response::json($hostel);*/
         /*dd($hostel);*/
-        return view('about', compact('hostel'));
+        return view('about', compact('hostel', 'ret'));
     }
 
     public function contact($hostel_id)
     {
         $hostel = Hostel::findorFail($hostel_id);
         $hostel['rooms'] = HostelRooms::where('hostel_id', $hostel_id)->get();
+        $get = $hostel['landlord_id'];
+        $ret = User::findorFail($get);
         /*return Response::json($hostel);*/
         /*dd($hostel);*/
-        return view('contact', compact('hostel'));
+        return view('contact', compact('hostel', 'ret'));
     }
 }

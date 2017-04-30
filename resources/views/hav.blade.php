@@ -160,6 +160,7 @@
                             <li>
                                 <div class="yamm-content">
                                     <div class="row">
+                                    @if(isset($get))
                                         @if(!Auth::guest() && Auth::user()->role == "Landlord")
                                         @foreach($get as $notify)
                                         <ul class="col-lg-12 list-unstyled places">
@@ -171,6 +172,9 @@
                                         </ul>
                                             @endforeach
                                             @endif
+                                    @else
+                                        <div></div>
+                                    @endif
                                     </div>
                                 </div>
                             </li>

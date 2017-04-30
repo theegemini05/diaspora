@@ -267,7 +267,8 @@ Route::post('/registerhostel', 'RegisterHostelController@store');
 Route::get('/book/{hostel_id}/{room_id}', 'BookController@index');
 Route::post('/book', 'BookController@store');
 
-
+Route::get('/contactlandlord/{hostel_id}', 'ContactLandlordController@message');
+Route::post('/contactlandlord', 'ContactLandlordController@store');
 
 Auth::routes();
 

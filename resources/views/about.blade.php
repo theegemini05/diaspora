@@ -53,10 +53,9 @@
                 </div>
             </div>
 
-            <div class="col-md-4" style="color: #fff;">
+            <div class="col-md-4" style="color: #fed136;">
                 <h2 style="border-bottom: 1px solid #fed136; font-size: larger; color: #fed136;"><b style="font-size: 30px;">a</b>bout <b style="font-size: 25px;">{{$hostel->hname}} {{$hostel->hregion}}</b> </h2>
-                <p>{{$hostel->address}}</p>
-                <p><small>Some Text</small></p>
+                <p>Address: {{$hostel->address}}</p>
             </div>
         </div>
 

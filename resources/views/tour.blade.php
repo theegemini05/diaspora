@@ -99,7 +99,7 @@
                                 <br><br>
                                 <button style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn"><i class="fa fa-heart"></i> add to wishlist</button><br><br><br><br>
                                 <button style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn"><i class="fa fa-street-view"></i> physical tour</button><br><br><br><br>
-                                <button style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn"><i class="fa fa-mobile"></i> contact management</button><br><br><br><br>
+                                <a style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn" href="{{url('/contact/'.$hostel->id)}}"><i class="fa fa-mobile"></i> contact management</a><br><br><br><br>
                                 <br><br><br>
 
                                 <a style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn" @if(!Auth::guest())href="{{url('/book/'.$hostel->id.'/'.$room->id)}}" @else href="{{url('/login')}}"@endif><i class="fa fa-gavel"></i> book room {{$room->rno}}</a><br><br><br>

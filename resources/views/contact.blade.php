@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header" style="color: #fff; border-bottom: 1px solid #fed136;">contact
-                    <small style="color: #fed136;"><b style="font-size: 30px;">b</b>oraya <b style="font-size: 30px;">b</b>ooster </small>
+                    <small style="color: #fed136;"><b style="font-size: 30px;">{{$hostel->hname}} {{$hostel->hregion}}</b></small>
                 </h1>
 
                 <ol class="breadcrumb" style="background-color: #222222">
@@ -50,13 +50,13 @@
             </div>
 
             <div class="col-md-4" style="color: #fed136;">
-                <h3 style="border-bottom: 1px solid #fed136; color: #fed136;"><b style="font-size: 30px">c</b>ontact <b style="font-size: 30px;">b</b>oraya</h3>
-                <p>Egerton 867-40200</p>
+                <h3 style="border-bottom: 1px solid #fed136; color: #fed136;"><b style="font-size: 30px">c</b>ontact <b style="font-size: 25px;">{{$hostel->hname}}</b></h3>
+                <p>Address: {{$hostel->address}}</p>
                 <p><i class="fa fa-phone"></i>
-                    <abbr title="Phone">P</abbr>: (+254) 700000000
+                    <abbr title="Phone">P</abbr>: (+254) {{$ret->p_number}}
                 </p>
                 <p><i class="fa fa-envelope-o"></i>
-                    <abbr title="Email Address">E</abbr>: <a style="color: #fed136;" href="mailto:boraya@gmail.com">boraya@gmail.com</a>
+                    <abbr title="Email Address">E</abbr>: <a style="color: #fed136;" href="mailto:{{$ret->email}}">{{$ret->email}}</a>
                 </p>
 
                 <ul class="list-unstyled list-inline list-social-icons">
@@ -71,39 +71,10 @@
         </div><br><br>
 
         <div class="row">
-            <div class="col-md-8">
-                <h3 style="color: #fed136;">Send us a Message</h3>
-                <form name="sentMessage" id="contactForm" novalidate>
-                    <div class="form-group control-group">
-                        <div class="controls contact name">
-                            <input style="border: 1px solid #fed136;" type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name." placeholder="Enter Your Name(s)">
-                            <p class="help-block"></p>
-                        </div>
-                    </div>
-
-                    <div class="form-group control-group">
-                        <div class="controls contact phone">
-                            <input style="border: 1px solid #fed136" type="text" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number." placeholder="Enter Your Phone Number(s)">
-                        </div>
-                    </div>
-
-                    <div class="form-group control-group">
-                        <div class="controls contact email">
-                            <input style="border: 1px solid #fed136" type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address." placeholder="Enter Your Email-Address">
-                        </div>
-                    </div>
-
-                    <div class="form-group control-block">
-                        <div class="controls contact message">
-                            <textarea style="border: 1px solid #fed136; width: 750px;" rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message." maxlength="999" style="resize:none" placeholder="Write Down Your Message Here"></textarea>
-                        </div>
-                    </div>
-                    <div id="success"></div>
-
-                    <button style="background-color: #fed136;color: #222222;border: 2px solid #222222;" type="submit" class="btn">Send Message <i class="fa fa-paper-plane"></i></button>
-                </form>
+            <div class="col-lg-12">
+                <center><a class="btn btn-lg" style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 570px;" @if(Auth::guest())href="{{url('/login')}} @else href="{{url('contactlandlord/'.$hostel->id)}}" @endif">Send message to landlord {{$hostel->hname}} hostels</a></center>
             </div>
-        </div><br><br><br>
+        </div><br><br>
 
         @include('footer')
     </div></div>
