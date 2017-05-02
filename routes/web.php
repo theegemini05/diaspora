@@ -274,5 +274,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@hostel');
 Route::get('/home/ackbooking/{hostel_id}/{room_id}/{book_id}', 'HomeController@acknowledge');
+Route::get('/home/messagelandlord/{hostel_id}/{message_id}', 'HomeController@message');
 
 

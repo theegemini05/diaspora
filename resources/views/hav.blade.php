@@ -153,7 +153,7 @@
                 @else
                     <li class="dropdown yamm-fw">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            notifications <i class="fa fa-comments"></i>
+                            notifications <i class="fa fa-ravelry"></i>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
@@ -181,6 +181,42 @@
                         </ul>
                     </li>
                 @endif
+
+                    @if (Auth::guest())
+                        <li class="dropdown yamm-fw">
+                        </li>
+                    @else
+                        <li class="dropdown yamm-fw">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                messages <i class="fa fa-comments"></i>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <div class="yamm-content">
+                                        <div class="row">
+                                            @if(isset($message))
+                                                @if(!Auth::guest() && Auth::user()->role == "Landlord")
+                                                    @foreach($message as $send)
+                                                        <ul class="col-lg-12 list-unstyled places">
+                                                            @if($send->landlord_id == Auth::user()->id)
+                                                                <center><li><a class="hders" style="font-size: 15px;" href="{{url('/home/messagelandlord/'.$send->hostel_id.'/'.$send->id)}}">{{$send->fname}} {{$send->lname}} sent a message</a></li></center>
+                                                            @else
+                                                                <li></li>
+                                                            @endif
+                                                        </ul>
+                                                    @endforeach
+                                                @endif
+                                            @else
+                                                <div></div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
+
 
                 @if (Auth::guest())
                     <li class="dropdown yamm-fw">
