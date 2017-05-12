@@ -39,15 +39,13 @@
 
 <body>
 @include('hav')
-    @if (session('status'))
-        <div class="container" id="login" style="height: 50px;">
+    {{--@if (session('status'))
             <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong>Success!</strong> <br>
             {{ session('status') }}
         </div>
-        </div>
-    @endif
+    @endif--}}
 
 <div class="container" id="login" style="height: 470px;">
     <center><img src="{{url('images/hostel.jpg')}}"></center>

@@ -30,37 +30,115 @@
 <div id="main">
     @include('hav')
 
-    <div class="container" style="margin-top: 120px; color: #fed136; text-align: left; font-size: 20px;>
-        <div class=">
+    <div class="container" style="margin-top: 100px; color: #fed136; text-align: left; font-size: 20px;>
         <div class="row">
     <div class="col-lg-12">
-        <center><h3>Message from {{$messages->fname}} {{$messages->lname}}</h3></center>
-        <center><table>
-                <thead style="color: #FFFFFF;">
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name(s)</th>
-                    <th>Email Address</th>
-                    <th>Phone Number</th>
-                    <th>Message</th>
-                    <th>Hostel Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>{{$messages->fname}}</td>
-                    <td>{{$messages->lname}}</td>
-                    <td>{{$messages->email}}</td>
-                    <td>{{$messages->pnumber}}</td>
-                    <td>{{$messages->message}}</td>
-                    <td>{{$hostel->hname}}</td>
-                </tr>
-                </tbody>
-            </table></center><br>
+        @if(!Auth::guest() && Auth::user()->role == "Landlord")
+        <h3>MESSAGES::{{$messages->fname}} {{$messages->lname}}--{{$messages->email}}--{{$messages->pnumber}}</h3>
+        @endif
+        @if(!Auth::guest() && Auth::user()->role == "User")
+           <h3>MESSAGES::{{$details->fname}} {{$details->lname}}--{{$details->email}}--{{$details->p_number}}</h3>
+        @endif
+
+        {{--@if($messages->user_id == Auth::user()->id)--}}
+
+            @foreach($text as $item)
+                @if($item->user_id == Auth::user()->id)
+                <div class="right">
+                <h4 style="color: #FFFFFF; font-size: 12px;">You</h4>
+                <div class="row">
+                    <div class="col-lg-3" style="background-color: rgba(242, 242, 242, 0.4); box-shadow: 10px 10px 5px rgba(254, 209, 54, 0.4); border-radius: 10px; font-size: 18px; color: #000000; width: 300px;">
+                        {{$item->message}}<br>
+                        <i style="font-size: 12px;">{{$item->created_at}}</i>
+                    </div>
+                </div><br>
+                </div>
+                @else
+                    <div class="left">
+                            <h4 style="color: #FFFFFF; font-size: 12px;">{{$item->lname}}</h4>
+                            <div class="row">
+                                <div class="col-lg-3" style="background-color: rgba(254, 209, 54, 0.4); box-shadow: 10px 10px 5px rgba(242, 242, 242, 0.4); border-radius: 10px; font-size: 18px; color: #000000; width: 300px;">
+                                    {{$item->message}}<br>
+                                    <i style="font-size: 12px;">{{$item->created_at}}</i>
+                                </div>
+                            </div><br>
+                    </div>
+                @endif
+            @endforeach
+
+        {{--@endif--}}
+        {{--@if()
+            <div class="left">
+                @foreach($text as $take)
+                    <h4 style="color: #FFFFFF; font-size: 12px;">{{$hostel->hname}} Hostels</h4>
+                    <div class="row">
+                        <div class="col-lg-3" style="background-color: rgba(254, 209, 54, 0.4); box-shadow: 10px 10px 5px rgba(242, 242, 242, 0.4); border-radius: 10px; font-size: 18px; color: #000000; width: 300px;">
+                            {{$text->message}}<br>
+                            <i style="font-size: 12px;">{{$text->created_at}}</i>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif--}}
+
+        {{--<div class="row reply" >
+            <div class="col-lg-3" style="background-color: rgba(254, 209, 54, 0.4); box-shadow: 10px 10px 5px rgba(242, 242, 242, 0.4); border-radius: 10px; font-size: 18px; color: #000000; width: 300px;">
+                {{$ripoti->message}}<br>
+                <i style="font-size: 12px;">{{$ripoti->created_at}}</i>
+            </div>
+        </div>--}}
 
         <div class="row">
             <div class="col-lg-12">
-                <center><td><a class="btn btn-lg btn-success" style="width: 250px;">Reply to message<i class="fa fa-paper-plane"></i></a></td></center>
+                <form role="form" method="POST" action="{{ url('/messagelandlord') }}">
+
+                    {{ csrf_field() }}
+
+                    {{--@if (session('status'))
+                        <div class="alert alert-success" style="font-size: 12px; border-top: 15px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong><center>{{ session('status') }}</center></strong>
+                        </div>
+                    @endif--}}
+                    <input type="hidden" name="fname" value="{{$mwenyewe->fname}}">
+                    <input type="hidden" name="lname" value="{{$mwenyewe->lname}}">
+                    <input type="hidden" name="email" value="{{$mwenyewe->email}}">
+                    <input type="hidden" name="pnumber" value="{{$mwenyewe->p_number}}">
+                    <input type="hidden" name="user_id" value="{{$messages->user_id}}">
+                    <input type="hidden" name="hostel_id" value="{{$messages->hostel_id}}">
+                    <input type="hidden" name="message_id" value="{{$messages->id}}">
+                    {{--<div class="form-group control-group">
+                        <div class="controls contact name">
+                            <input style="border: 1px solid #fed136;" type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name." placeholder="Enter Your Name(s)">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group control-group">
+                        <div class="controls contact phone">
+                            <input style="border: 1px solid #fed136" type="text" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number." placeholder="Enter Your Phone Number(s)">
+                        </div>
+                    </div>
+
+                    <div class="form-group control-group">
+                        <div class="controls contact email">
+                            <input style="border: 1px solid #fed136" type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address." placeholder="Enter Your Email-Address">
+                        </div>
+                    </div>--}}
+
+                    <div class="form-group{{ $errors->has('ripoti') ? ' has-error' : '' }}">
+                        <div class="col-md-9 message" style="padding-left: 0;">
+                            <input style="border: 1px solid #fed136; width: 872px;" id="message" type="text" class="form-control" name="message" value="{{ old('message') }}" placeholder="Enter your message" required autofocus>
+
+                            @if ($errors->has('ripoti'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('message') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
+                    <center><button class="btn btn-lg btn-success" type="submit" style="width: 250px;">Send Reply<i class="fa fa-paper-plane"></i></button></center>
+                </form>
             </div>
         </div>
     </div>

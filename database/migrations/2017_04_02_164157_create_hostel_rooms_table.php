@@ -15,12 +15,13 @@ class CreateHostelRoomsTable extends Migration
     {
         Schema::create('hostel_rooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('hostel_id')->unsigned();
+            $table->integer('hostel_id')->unsigned()->index();
             $table->integer('rno');
             $table->string('pics');
+            $table->boolean('status')->default(0);
             $table->timestamps();
 
-            $table->foreign('hostel_id')->references('id')->on('hostels');
+            $table->foreign('hostel_id')->references('id')->on('hostels')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

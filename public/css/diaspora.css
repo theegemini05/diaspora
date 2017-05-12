@@ -32,9 +32,14 @@ ul.dropdown-menu {
     list-style: none;
 }
 
-.navbar-custom .nav li:hover ul.dropdown-menu ul.places li a {
+.navbar-custom .nav li:hover ul.dropdown-menu ul.places li a:link {
+    color: #fed136;
     padding: 5px;
     text-decoration: none;
+}
+
+.navbar-custom .nav li ul.dropdown-menu ul.places li.messages a:visited {
+    color: #FFFFFF;
 }
 
 .navbar-custom .nav li:hover ul.dropdown-menu ul.places li a:hover {
@@ -77,6 +82,22 @@ li a.side-hders:hover {
 .panel .panel-heading {
     background-color: #222222;
     color: #fed136;
+}
+
+.right {
+    position: relative;
+    float: right;
+    padding-left: 740px;
+}
+
+.left {
+    position: relative;
+    float: left;
+    padding-right: 740px;
+}
+
+.messages a:visited {
+    color: #FFFFFF;
 }
 
 div.carousel-inner {

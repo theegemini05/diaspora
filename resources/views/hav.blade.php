@@ -196,20 +196,31 @@
                                     <div class="yamm-content">
                                         <div class="row">
                                             @if(isset($message))
-                                                @if(!Auth::guest() && Auth::user()->role == "Landlord")
+                                                {{--@if(!Auth::guest() && Auth::user()->role == "Landlord")--}}
                                                     @foreach($message as $send)
                                                         <ul class="col-lg-12 list-unstyled places">
                                                             @if($send->landlord_id == Auth::user()->id)
-                                                                <center><li><a class="hders" style="font-size: 15px;" href="{{url('/home/messagelandlord/'.$send->hostel_id.'/'.$send->id)}}">{{$send->fname}} {{$send->lname}} sent a message</a></li></center>
+                                                                <center><li class="messages"><a class="hders" style="font-size: 15px;" href="{{url('/home/messagelandlord/'.$send->hostel_id.'/'.$send->id.'/'.$send->user_id)}}">{{$send->fname}} {{$send->lname}} sent a message<i style="margin-left: 620px;">{{$send->created_at}}</i></a></li></center>
+                                                            @else
+                                                                <li></li>
+                                                            @endif
+                                                        </ul>
+                                                    @endforeach
+                                                {{--@endif--}}
+                                            @endif
+                                            {{--@if(isset($reply))
+                                                @if(!Auth::guest() && Auth::user()->role == "User")
+                                                    @foreach($reply as $ripoti)
+                                                        <ul class="col-lg-12 list-unstyled places">
+                                                            @if($ripoti->user_id == Auth::user()->id)
+                                                                <center><li><a class="hders" style="font-size: 15px;" href="{{url('/home/messagelandlord/'.$ripoti->hostel_id.'/'.$ripoti->id)}}">{{$ripoti->fname}} {{$ripoti->lname}} sent a message</a></li></center>
                                                             @else
                                                                 <li></li>
                                                             @endif
                                                         </ul>
                                                     @endforeach
                                                 @endif
-                                            @else
-                                                <div></div>
-                                            @endif
+                                            @endif--}}
                                         </div>
                                     </div>
                                 </li>
