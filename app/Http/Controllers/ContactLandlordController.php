@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use App\ApproveBookings;
 use App\ContactLandlord;
 use App\Hostel;
 use Illuminate\Foundation\Auth\User;
@@ -42,8 +43,9 @@ class ContactLandlordController extends Controller
     public function message($hostel_id){
         $get = Hostel::findorFail($hostel_id);
         $user = User::findorFail(Auth::user()->id);
+        $app = ApproveBookings::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         /*dd($user);*/
-        return view('contactLandlord', compact('get', 'user'));
+        return view('contactLandlord', compact('get', 'user', 'app'));
     }
 
     public function store(Request $request)

@@ -102,7 +102,11 @@
                                 <a style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn" href="{{url('/contact/'.$hostel->id)}}"><i class="fa fa-mobile"></i> contact management</a><br><br><br><br>
                                 <br><br><br>
 
-                                <a style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn" @if(!Auth::guest())href="{{url('/book/'.$hostel->id.'/'.$room->id)}}" @else href="{{url('/login')}}"@endif><i class="fa fa-gavel"></i> book room {{$room->rno}}</a><br><br><br>
+                                @if($room->status == 1)
+                                    <button style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px; height: 40px;">Room Booked</button>
+                                @else
+                                    <a style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn" @if(!Auth::guest())href="{{url('/book/'.$hostel->id.'/'.$room->id)}}" @else href="{{url('/login')}}"@endif><i class="fa fa-gavel"></i> book room {{$room->rno}}</a><br><br><br>
+                                @endif
                             </div>
                         </div>
                     </div>

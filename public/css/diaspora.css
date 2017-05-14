@@ -13,6 +13,11 @@ html, body{
     color: #fed136;
 }
 
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
 .navbar-custom .nav li a {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: lowercase;
@@ -38,7 +43,17 @@ ul.dropdown-menu {
     text-decoration: none;
 }
 
+.navbar-custom .nav li:hover ul.dropdown-menu ul.places li.notifications a:link {
+    color: #fed136;
+    padding: 5px;
+    text-decoration: none;
+}
+
 .navbar-custom .nav li ul.dropdown-menu ul.places li.messages a:visited {
+    color: #FFFFFF;
+}
+
+.navbar-custom .nav li ul.dropdown-menu ul.places li.notifications a:visited {
     color: #FFFFFF;
 }
 

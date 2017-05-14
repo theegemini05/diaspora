@@ -165,7 +165,7 @@
                                         @foreach($get as $notify)
                                         <ul class="col-lg-12 list-unstyled places">
                                             @if($notify->landlord_id == Auth::user()->id)
-                                                <center><li><a class="hders" style="font-size: 15px;" href="{{url('/home/ackbooking/'.$notify->hostel_id.'/'.$notify->room_id.'/'.$notify->id)}}">{{$notify->fname}} {{$notify->lname}} sent a booking request</a></li></center>
+                                                <center><li class="messages"><a class="hders" style="font-size: 15px;" href="{{url('/home/ackbooking/'.$notify->hostel_id.'/'.$notify->room_id.'/'.$notify->id)}}">{{$notify->fname}} {{$notify->lname}} sent a booking request<i style="margin-left: 520px;">{{$notify->created_at}}</i></a></li></center>
                                                 @else
                                                 <li></li>
                                                 @endif
@@ -174,6 +174,26 @@
                                             @endif
                                     @else
                                         <div></div>
+                                    @endif
+
+                                    @if(isset($app))
+                                            @if(!Auth::guest() && Auth::user()->role == "User")
+                                                @foreach($app as $rove)
+                                                    <ul class="col-lg-12 list-unstyled places">
+                                                        @if($rove->user_id == Auth::user()->id)
+                                                            @if($rove->status == 1)
+                                                            <center><li class="notifications"><a class="hders" style="font-size: 15px; color: #2ca02c;" href="{{url('/home/ackbooking/'/*.$rove->hostel_id.'/'.$notify->room_id.'/'.$notify->id*/)}}">{{$rove->fname}} {{$rove->lname}} approved your booking request<i style="margin-left: 520px;">{{$rove->created_at}}</i></a></li></center>
+                                                            @else
+                                                                <center><li class="notifications"><a class="hders" style="font-size: 15px; color: #880000;" href="{{url('/home/ackbooking/'/*.$rove->hostel_id.'/'.$notify->room_id.'/'.$notify->id*/)}}">{{$rove->fname}} {{$rove->lname}} declined your booking request<i style="margin-left: 520px;">{{$rove->created_at}}</i></a></li></center>
+                                                            @endif
+                                                        @else
+                                                            <li></li>
+                                                        @endif
+                                                    </ul>
+                                                @endforeach
+                                            @endif
+                                    @else
+                                            <div></div>
                                     @endif
                                     </div>
                                 </div>

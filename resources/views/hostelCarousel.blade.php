@@ -13,27 +13,27 @@
                 <h2>Egerton Main Graduation Square</h2>
             </div>
         </div>
-
+{{--
         <div class="item">
-            <img src="{{url('images/pool.jpg')}}", class="caro">
+            <img src="{{url('photos/pool.jpg')}}", class="caro">
             <div class="carousel-caption">
                 <h2>Egerton Main Gate</h2>
             </div>
         </div>
 
         <div class="item">
-            <img src="{{url('images/(3).jpg')}}", class="caro">
+            <img src="{{url('photos/(3).jpg')}}", class="caro">
             <div class="carousel-caption">
                 <h2>Egerton Castle</h2>
             </div>
         </div>
 
         <div class="item">
-            <img src="{{url('images/(8).jpg')}}", class="caro">
+            <img src="{{url('photos/(8).jpg')}}", class="caro">
             <div class="carousel-caption">
                 <h2>Egerton Castle</h2>
             </div>
-        </div>
+        </div>--}}
 
         <a href="#hostelCarousel" class="left carousel-control" data-slide="prev" role="button">
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: #f6bf01;"></span>

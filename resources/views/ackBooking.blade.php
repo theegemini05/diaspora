@@ -33,6 +33,18 @@
     <div class="container" style="margin-top: 120px; color: #fed136; text-align: left; font-size: 20px;>
         <div class="row">
             <div class="col-lg-12">
+                @if (session('habari'))
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong><center>{{ session('habari') }}</center></strong>
+                    </div>
+                @endif
+                @if (session('message'))
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong><center>{{ session('message') }}</center></strong>
+                    </div>
+                @endif
                 <center><h3>Booking Request for {{$ret->fname}} {{$ret->lname}}</h3></center>
                 <center><table>
                         <thead style="color: #FFFFFF;">
@@ -58,12 +70,40 @@
                     </table></center><br>
 
                 <div class="row">
+                    <form role="form" method="POST" action="{{ url('/home/approvebooking') }}">
+                        {{ csrf_field() }}
+
+                        <input type="hidden" name="fname" value="{{Auth::user()->fname}}">
+                        <input type="hidden" name="lname" value="{{Auth::user()->lname}}">
+                        <input type="hidden" name="email" value="{{Auth::user()->email}}">
+                        <input type="hidden" name="pnumber" value="{{Auth::user()->p_number}}">
+                        <input type="hidden" name="landlord_id" value="{{Auth::user()->id}}">
+                        <input type="hidden" name="hostel_id" value="{{$hostel->id}}">
+                        <input type="hidden" name="user_id" value="{{$ret->user_id}}">
+                        <input type="hidden" name="room_id" value="{{$ret->room_id}}">
+                        <input type="hidden" name="book_id" value="{{$ret->id}}">
+                        {{--<input type="hidden" name="message_id" value="{{$messages->id}}">--}}
                     <div class="col-lg-6">
-                        <center><td><a class="btn btn-lg btn-success" style="width: 250px;">Approve Request <i class="fa fa-check"></i></a></td></center>
+                        <center><td><button class="btn btn-lg btn-success" type="submit" style="width: 250px;" href="{{url('/home/approvebooking/'.$gets->hostel_id.'/'.$gets->id.'/'.$ret->id)}}">Approve Request <i class="fa fa-check"></i></button></td></center>
                     </div>
-                    <div class="col-lg-6">
-                        <center><td><a class="btn btn-lg btn-danger" style="width: 250px;">Decline Request <i class="fa fa-times"></i></a></td></center>
-                    </div>
+                    </form>
+                    <form role="form" method="POST" action="{{ url('/home/declinebooking') }}">
+                        {{ csrf_field() }}
+
+                        <input type="hidden" name="fname" value="{{Auth::user()->fname}}">
+                        <input type="hidden" name="lname" value="{{Auth::user()->lname}}">
+                        <input type="hidden" name="email" value="{{Auth::user()->email}}">
+                        <input type="hidden" name="pnumber" value="{{Auth::user()->p_number}}">
+                        <input type="hidden" name="landlord_id" value="{{Auth::user()->id}}">
+                        <input type="hidden" name="hostel_id" value="{{$hostel->id}}">
+                        <input type="hidden" name="user_id" value="{{$ret->user_id}}">
+                        <input type="hidden" name="room_id" value="{{$ret->room_id}}">
+                        <input type="hidden" name="book_id" value="{{$ret->id}}">
+                        {{--<input type="hidden" name="message_id" value="{{$messages->id}}">--}}
+                        <div class="col-lg-6">
+                            <center><td><button class="btn btn-lg btn-danger" style="width: 250px;">Decline Request <i class="fa fa-times"></i></button></td></center>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
