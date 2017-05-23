@@ -46,6 +46,8 @@ Route::post('/home/approvebooking', 'HomeController@approve');
 Route::post('/home/declinebooking', 'HomeController@decline');
 Route::get('/home/messagelandlord/{hostel_id}/{message_id}/{user_id}', 'HomeController@message');
 Route::post('/messagelandlord', 'HomeController@store');
+Route::get('/home/acceptroom/{hostel_id}/{room_id}/{book_id}/{approve_id}', 'HomeController@acceptRoom');
+Route::get('/home', 'HomeController@hostel');
 
 
 

@@ -13,9 +13,30 @@ html, body{
     color: #fed136;
 }
 
-a.disabled {
-    pointer-events: none;
-    cursor: default;
+.navbar-custom .nav li:hover ul.dropdown-menu ul.places li.approved a {
+    color: #2ca02c;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.navbar-custom .nav li:hover ul.dropdown-menu ul.places li.approved a:hover {
+    background-color: #2ca02c;
+    color: #000000;
+    transition: background 0.5s linear;
+    list-style: none;
+}
+
+.navbar-custom .nav li:hover ul.dropdown-menu ul.places li.declined a {
+    color: #880000;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.navbar-custom .nav li:hover ul.dropdown-menu ul.places li.declined a:hover {
+    background-color: #880000;
+    color: #000000;
+    transition: background 0.5s linear;
+    list-style: none;
 }
 
 .navbar-custom .nav li a {
@@ -28,6 +49,12 @@ a.disabled {
 
 ul.dropdown-menu {
     background-color: rgba(34, 34, 34, 0.8);
+}
+li.approved a:hover {
+    background-color: #2ca02c;
+    color: #000000;
+    transition: background 0.5s linear;
+    list-style: none;
 }
 
 .navbar-custom .nav li a:hover {
@@ -129,6 +156,17 @@ div.carousel-inner {
     box-shadow: 10px 10px 5px rgba(254, 209, 54, 0.4);
 }
 
+#register {
+    width: 1200px;
+    height: 1250px;
+    height: 1280px;
+    background-color: rgba(242, 242, 242, 0.1);
+    border-radius: 4px;
+    margin: 0 auto;
+    margin-top: 130px;
+    box-shadow: 10px 10px 5px rgba(254, 209, 54, 0.1);
+}
+
 #intro {
     color: #fed136;
     margin: 0 auto;
@@ -136,6 +174,14 @@ div.carousel-inner {
 }
 
 #login img {
+    width: 110px;
+    height: 110px;
+    border-radius: 55px;
+    margin-top: -55px;
+    margin-bottom: 30px;
+}
+
+#register img {
     width: 110px;
     height: 110px;
     border-radius: 55px;
@@ -158,6 +204,11 @@ div.carousel-inner {
     font-size: 12px;
 }
 
+#register input[type="file"] {
+    font-size: 12px;
+    width: 1160px;
+}
+
 #login select {
     height: 50px;
     width: 300px;
@@ -167,6 +218,17 @@ div.carousel-inner {
     border: none;
     background-color: #fff;
     padding-left: 40px;
+}
+
+#register select {
+    height: 50px;
+    width: 1160px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: none;
+    background-color: #fff;
+    padding-left: 60px;
 }
 
 #newsLetter input[type="email"], [type="text"] {
@@ -193,6 +255,45 @@ div.carousel-inner {
     font-size: 35px;
     color: #222222;
 }
+.title::before {
+    content: "\270f";
+    position: absolute;
+    font-family: "FontAwesome";
+    padding-left: 8px;
+    padding-top: 0px;
+    font-size: 35px;
+    color: #222222;
+}
+
+.search::before {
+    content: "...";
+    position: absolute;
+    font-family: "FontAwesome";
+    padding-left: 8px;
+    padding-top: 0px;
+    font-size: 35px;
+    color: #222222;
+}
+
+.lat::before {
+    content: "lat:";
+    position: absolute;
+    font-family: "FontAwesome";
+    padding-left: 8px;
+    padding-top: 0px;
+    font-size: 25px;
+    color: #222222;
+}
+
+.lng::before {
+    content: "lng:";
+    position: absolute;
+    font-family: "FontAwesome";
+    padding-left: 8px;
+    padding-top: 0px;
+    font-size: 25px;
+    color: #222222;
+}
 
 .email::before {
     content: "\f01c";
@@ -204,6 +305,15 @@ div.carousel-inner {
     color: #222222;
 }
 
+.rent::before {
+    content: "\20ac";
+    position: absolute;
+    font-family: "FontAwesome";
+    padding-left: 8px;
+    padding-top: 0px;
+    font-size: 35px;
+    color: #222222;
+}
 
 .password::before {
     content: "\f023";
@@ -346,3 +456,4 @@ table {
 td, th{
     padding: 10px;
 }
+

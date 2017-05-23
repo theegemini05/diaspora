@@ -182,9 +182,9 @@
                                                     <ul class="col-lg-12 list-unstyled places">
                                                         @if($rove->user_id == Auth::user()->id)
                                                             @if($rove->status == 1)
-                                                            <center><li class="notifications"><a class="hders" style="font-size: 15px; color: #2ca02c;" href="{{url('/home/ackbooking/'/*.$rove->hostel_id.'/'.$notify->room_id.'/'.$notify->id*/)}}">{{$rove->fname}} {{$rove->lname}} approved your booking request<i style="margin-left: 520px;">{{$rove->created_at}}</i></a></li></center>
+                                                            <center><li class="approved"><a class="hders" style="font-size: 15px;" href="{{url('/home/acceptroom/'.$rove->hostel_id.'/'.$rove->room_id.'/'.$rove->book_id.'/'.$rove->id)}}">{{$rove->fname}} {{$rove->lname}} approved your booking request<i style="margin-left: 520px;">{{$rove->created_at}}</i></a></li></center>
                                                             @else
-                                                                <center><li class="notifications"><a class="hders" style="font-size: 15px; color: #880000;" href="{{url('/home/ackbooking/'/*.$rove->hostel_id.'/'.$notify->room_id.'/'.$notify->id*/)}}">{{$rove->fname}} {{$rove->lname}} declined your booking request<i style="margin-left: 520px;">{{$rove->created_at}}</i></a></li></center>
+                                                                <center><li class="declined"><a class="hders" style="font-size: 15px;" href="{{url('/tour/'.$rove->hostel_id)}}">{{$rove->fname}} {{$rove->lname}} declined your booking request<i style="margin-left: 520px;">{{$rove->created_at}}</i></a></li></center>
                                                             @endif
                                                         @else
                                                             <li></li>

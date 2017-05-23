@@ -8,11 +8,12 @@
 
 namespace App\Http\Controllers;
 
-use App\ApproveBookings;
+use App\ApprovedBooking;
+use App\RegisterHostel;
+use App\RegisterHostelRooms;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use App\HostelRooms;
-use App\Hostel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
@@ -22,25 +23,25 @@ class RegisterHostelRoomsController extends Controller
 {
     public function __construct()
     {
-        $njokerio = Hostel::where("hregion", "Njokerio")->get();
+        $njokerio = RegisterHostel::where("hregion", "Njokerio")->get();
         View::share("njokerio", $njokerio);
-        $right = Hostel::where("hregion", "Right")->get();
+        $right = RegisterHostel::where("hregion", "Right")->get();
         View::share("right", $right);
-        $booster = Hostel::where("hregion", "Booster")->get();
+        $booster = RegisterHostel::where("hregion", "Booster")->get();
         View::share("booster", $booster);
-        $carwash = Hostel::where("hregion", "Carwash")->get();
+        $carwash = RegisterHostel::where("hregion", "Carwash")->get();
         View::share("carwash", $carwash);
     }
 
     public function create($hostel_id)
     {
-        $hostel = Hostel::findorFail($hostel_id);
+        $hostel = RegisterHostel::findorFail($hostel_id);
         return view('registerHostelRooms', compact('hostel'));
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        /*$this->validate($request, [
             //'rno' => 'required|number',
             'pics' => 'mimes:jpeg,jpg,png|max:10000'
         ]);
@@ -56,8 +57,9 @@ class RegisterHostelRoomsController extends Controller
             $name = $filename . '.' . time() . '.' . $extension;
 
             Input::file('pics')->move(public_path() . '/photos/', $name);
-        }
-        $hostelrooms['pics'] = $name;
+        }*/
+        /*$hostelrooms['pics'] = $name;*/
+        $hostelrooms = new RegisterHostelRooms($request->all());
         $hostelrooms->save();
 
         //return success message to page
@@ -67,17 +69,22 @@ class RegisterHostelRoomsController extends Controller
 
     public function tour($hostel_id)
     {
-        $hostel = Hostel::findorFail($hostel_id);
-        $hostel['rooms'] = HostelRooms::where('hostel_id', $hostel_id)->get();
-        $app = ApproveBookings::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
-        return view('tour', compact('hostel', 'app'));
+        $hostel = RegisterHostel::findorFail($hostel_id);
+        $hostel['rooms'] = RegisterHostelRooms::where('hostel_id', $hostel_id)->get();
+        $roomdetails = RegisterHostelRooms::where('hostel_id', $hostel_id)->get();
+        if(!Auth::guest()){
+            $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        }
+        return view('tour', compact('hostel', 'app', 'roomdetails'));
     }
 
     public function about($hostel_id)
     {
-        $hostel = Hostel::findorFail($hostel_id);
-        $hostel['rooms'] = HostelRooms::where('hostel_id', $hostel_id)->get();
-        $app = ApproveBookings::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        $hostel = RegisterHostel::findorFail($hostel_id);
+        $hostel['rooms'] = RegisterHostelRooms::where('hostel_id', $hostel_id)->get();
+        if(!Auth::guest()){
+            $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        }
         $get = $hostel['landlord_id'];
         $ret = User::findorFail($get);
         /*return Response::json($hostel);*/
@@ -87,9 +94,11 @@ class RegisterHostelRoomsController extends Controller
 
     public function contact($hostel_id)
     {
-        $hostel = Hostel::findorFail($hostel_id);
-        $hostel['rooms'] = HostelRooms::where('hostel_id', $hostel_id)->get();
-        $app = ApproveBookings::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        $hostel = RegisterHostel::findorFail($hostel_id);
+        $hostel['rooms'] = RegisterHostelRooms::where('hostel_id', $hostel_id)->get();
+        if(!Auth::guest()){
+            $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        }
         $get = $hostel['landlord_id'];
         $ret = User::findorFail($get);
         /*return Response::json($hostel);*/

@@ -69,12 +69,12 @@
         </div>
 
         <div class="form-group{{ $errors->has('pics') ? ' has-error' : '' }}" id="input">
-            <div class="col-md-6 pics">
-                <input style="border: 1px solid #fed136;" id="pics" type="file" class="form-control" name="pics" value="{{ old('pics') }}" placeholder="Hostel Pics" required autofocus>
+            <div class="col-md-6 rent">
+                <input style="border: 1px solid #fed136;" id="pics" type="text" class="form-control" name="rent" value="{{ old('rent') }}" placeholder="Hostel Rent" required autofocus>
 
-                @if ($errors->has('pics'))
+                @if ($errors->has('rent'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('pics') }}</strong>
+                        <strong>{{ $errors->first('rent') }}</strong>
                     </span>
                 @endif
             </div>

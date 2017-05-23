@@ -101,7 +101,7 @@
                         <input type="hidden" name="book_id" value="{{$ret->id}}">
                         {{--<input type="hidden" name="message_id" value="{{$messages->id}}">--}}
                         <div class="col-lg-6">
-                            <center><td><button class="btn btn-lg btn-danger" style="width: 250px;">Decline Request <i class="fa fa-times"></i></button></td></center>
+                            <center><td><button class="btn btn-lg btn-danger" style="width: 250px;">Disapprove Request <i class="fa fa-times"></i></button></td></center>
                         </div>
                     </form>
                 </div>

@@ -8,8 +8,8 @@
 
 namespace App\Http\Controllers;
 
+use App\RegisterHostel;
 use Illuminate\Http\Request;
-use App\Hostel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
@@ -18,13 +18,13 @@ class RegisterHostelController extends Controller
 {
     public function __construct()
     {
-        $njokerio = Hostel::where("hregion","Njokerio")->get();
+        $njokerio = RegisterHostel::where("hregion","Njokerio")->get();
         View::share("njokerio", $njokerio);
-        $right = Hostel::where("hregion", "Right")->get();
+        $right = RegisterHostel::where("hregion", "Right")->get();
         View::share("right", $right);
-        $booster = Hostel::where("hregion", "Booster")->get();
+        $booster = RegisterHostel::where("hregion", "Booster")->get();
         View::share("booster", $booster);
-        $carwash = Hostel::where("hregion", "Carwash")->get();
+        $carwash = RegisterHostel::where("hregion", "Carwash")->get();
         View::share("carwash", $carwash);
     }
 
@@ -42,10 +42,12 @@ class RegisterHostelController extends Controller
             'hname' => 'required',
             'hregion' => 'required',
             'address' => 'required',
-            'pics' => 'mimes:jpeg,jpg,png|max:10000'
+            'pics' => 'mimes:jpeg,jpg,png|max:20000',
+            'lat' => 'required',
+            'lng' => 'required',
         ]);
         //save user to db
-        $hostel = new Hostel($request->all());
+        $hostel = new RegisterHostel($request->all());
         if($request->pics != null){
             $file = Input::file('pics');
 

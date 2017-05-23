@@ -8,10 +8,11 @@
 
 namespace App\Http\Controllers;
 
-use App\HostelRooms;
+use App\ApprovedBooking;
+use App\RegisterHostel;
+use App\RegisterHostelRooms;
 use Illuminate\Http\Request;
-use App\BookRoom;
-use App\Hostel;
+use App\BookedRooms;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
@@ -20,22 +21,23 @@ class BookController extends Controller
     public function __construct()
     {
         /* $this->middleware('auth');*/
-        $njokerio = Hostel::where("hregion","Njokerio")->get();
+        $njokerio = RegisterHostel::where("hregion","Njokerio")->get();
         View::share("njokerio", $njokerio);
-        $right = Hostel::where("hregion", "Right")->get();
+        $right = RegisterHostel::where("hregion", "Right")->get();
         View::share("right", $right);
-        $booster = Hostel::where("hregion", "Booster")->get();
+        $booster = RegisterHostel::where("hregion", "Booster")->get();
         View::share("booster", $booster);
-        $carwash = Hostel::where("hregion", "Carwash")->get();
+        $carwash = RegisterHostel::where("hregion", "Carwash")->get();
         View::share("carwash", $carwash);
     }
 
     public function index($hostel_id, $room_id)
     {
-        $hostel = Hostel::findorFail($hostel_id);
-        $book= HostelRooms::findorFail($room_id);
+        $hostel = RegisterHostel::findorFail($hostel_id);
+        $book= RegisterHostelRooms::findorFail($room_id);
+        $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
 /*        dd($book, $hostel);*/
-        return view('book', compact('book', 'hostel'));
+        return view('book', compact('book', 'hostel', 'app'));
     }
 
     public function store(Request $request)
@@ -45,7 +47,7 @@ class BookController extends Controller
 /*        $hostel = new HostelRooms($request->all());*/
 
         //save user to db
-        $room = new BookRoom($request->all());
+        $room = new BookedRooms($request->all());
         $room['fname'] = Auth::user()->fname;
         $room['lname'] = Auth::user()->lname;
         $room['email'] = Auth::user()->email;

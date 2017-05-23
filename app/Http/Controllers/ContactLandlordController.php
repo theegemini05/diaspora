@@ -8,10 +8,9 @@
 
 namespace App\Http\Controllers;
 
-
-use App\ApproveBookings;
-use App\ContactLandlord;
-use App\Hostel;
+use App\ApprovedBooking;
+use App\ContactedLandlord;
+use App\RegisterHostel;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,13 +21,13 @@ class ContactLandlordController extends Controller
     public function __construct()
     {
         /* $this->middleware('auth');*/
-        $njokerio = Hostel::where("hregion","Njokerio")->get();
+        $njokerio = RegisterHostel::where("hregion","Njokerio")->get();
         View::share("njokerio", $njokerio);
-        $right = Hostel::where("hregion", "Right")->get();
+        $right = RegisterHostel::where("hregion", "Right")->get();
         View::share("right", $right);
-        $booster = Hostel::where("hregion", "Booster")->get();
+        $booster = RegisterHostel::where("hregion", "Booster")->get();
         View::share("booster", $booster);
-        $carwash = Hostel::where("hregion", "Carwash")->get();
+        $carwash = RegisterHostel::where("hregion", "Carwash")->get();
         View::share("carwash", $carwash);
         /*$get =  BookRoom::where('landlord_id', Auth::user()->id)->get();
         dd($get);
@@ -41,9 +40,9 @@ class ContactLandlordController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function message($hostel_id){
-        $get = Hostel::findorFail($hostel_id);
+        $get = RegisterHostel::findorFail($hostel_id);
         $user = User::findorFail(Auth::user()->id);
-        $app = ApproveBookings::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         /*dd($user);*/
         return view('contactLandlord', compact('get', 'user', 'app'));
     }
@@ -55,7 +54,7 @@ class ContactLandlordController extends Controller
         /*        $hostel = new HostelRooms($request->all());*/
 
         //save user to db
-        $message = new ContactLandlord($request->all());
+        $message = new ContactedLandlord($request->all());
         $message['fname'] = Auth::user()->fname;
         $message['lname'] = Auth::user()->lname;
         $message['email'] = Auth::user()->email;

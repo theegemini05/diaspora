@@ -9,14 +9,18 @@
     <link rel="stylesheet" href="{{url('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url('/css/bootstrap-theme.min.css')}}">
     <link rel="stylesheet" href="{{url('/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{url('/css/jquery.dataTables.min.css')}}">
 
     <link rel="stylesheet" href="{{url('/css/yamm.css')}}">
 
     <link rel="stylesheet" href="{{url('/css/diaspora.css')}}">
 
+    <link rel="stylesheet" href="{{url('/css/diasporaTables.css')}}">
+
     <link rel="stylesheet" href="{{url('/css/sidenav.css')}}">
 
     <link rel="icon" href="{{url('images/eger.png')}}">
+
 
     <title>Diaspora Room Booking</title>
 
@@ -40,7 +44,6 @@
 <body>
 <div id="main">
     @include('hav')
-
     <div class="container" style="padding-top: 60px;">
         <div class="row">
             <div class="col-lg-12">
@@ -66,54 +69,35 @@
                 <h3 class="page-header" style="color: #fed136; border-bottom:1px solid #fed136;"><b style="font-size: 30px;">r</b>ooms <b style="font-size: 30px;">o</b>ffered <b style="font-size: 30px;">b</b>y <b style="font-size: 30px;"> {{$hostel->hname}} {{$hostel->hregion}} </b></h3>
             </div>
 
-            <div class="col-lg-12">
-                <ul class="nav nav-tabs nav-justified" id="myTab">
-                    <?php $count = 0;?>
-                    @foreach($hostel->rooms as $room)
-                        @if($count == 0)
-                            <li class="active"><a href="#{{$hostel->hname}}{{$room->rno}}" data-toggle="tab"><i class="fa fa-bed"></i> <b style="font-size: 20px;">room</b>{{$room->rno}}</a></li>
+            <table id="rooms">
+                <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Rent per Month(KSH)</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach($roomdetails as $data)
+
+                    <tr>
+                        <td>{{$data->rno}}</td>
+                        <td>{{$data->rent}}</td>
+                        @if($data->status == 1)
+                            <td>Booked</td>
                         @else
-                            <li><a href="#{{$hostel->hname}}{{$room->rno}}" data-toggle="tab"><i class="fa fa-bed"></i> <b style="font-size: 20px;">room</b>{{$room->rno}}</a></li>
+                            <td>Vacant</td>
                         @endif
-                        <?php $count++?>
-                    @endforeach
-                </ul>
-
-
-                <div class="tab-content" id="myTabContent">
-                    <?php $count2 = 0;?>
-                @foreach($hostel->rooms as $room)
-                        @if($count2 == 0)
-                            <div class="tab-pane active fade in" id="{{$hostel->hname}}{{$room->rno}}">
+                        @if($data->status == 1)
+                            <td><button class="btn" style="background-color: rgba(242, 242, 242, 0); color: #fed136; border: 2px solid #000000; width: 200px;" disabled>Room Booked</button></td>
                         @else
-                            <div class="tab-pane fade in" id="{{$hostel->hname}}{{$room->rno}}">
+                            <td><a @if(!Auth::guest()) href="{{url('/book/'.$hostel->id.'/'.$data->id)}}" @else href="{{url('/login')}}" @endif class="btn" style="background-color: #fed136; color: #000000; border: 2px solid #000000; width: 200px;">Book Room</a></td>
                         @endif
-                        <div class="row">
-                            <div class="col-lg-9">
-                                <h4 style="color: #fed136;"><b style="font-size: 30px;">r</b>oom {{$room->rno}}</h4>
-                                @include('hostelRoomCarousel')
-                            </div>
-
-                            <div class="col-lg-3">
-                                <br>
-                                <br><br>
-                                <button style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn"><i class="fa fa-heart"></i> add to wishlist</button><br><br><br><br>
-                                <button style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn"><i class="fa fa-street-view"></i> physical tour</button><br><br><br><br>
-                                <a style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn" href="{{url('/contact/'.$hostel->id)}}"><i class="fa fa-mobile"></i> contact management</a><br><br><br><br>
-                                <br><br><br>
-
-                                @if($room->status == 1)
-                                    <button style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px; height: 40px;">Room Booked</button>
-                                @else
-                                    <a style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 270px;" type="submit" class="btn" @if(!Auth::guest())href="{{url('/book/'.$hostel->id.'/'.$room->id)}}" @else href="{{url('/login')}}"@endif><i class="fa fa-gavel"></i> book room {{$room->rno}}</a><br><br><br>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <?php $count2++?>
+                    </tr>
                 @endforeach
-                </div>
-            </div>
+                </tbody>
+            </table>
         </div><br><br><br>
 
         @include('footer')
@@ -122,9 +106,14 @@
 </div>
 @include('sidenav')
 <script src="{{url('js/jquery.js')}}"></script>
+<script src="{{url('/js/jquery.dataTables.js')}}" type="text/javascript" charset="utf-8"></script>
 <script src="{{url('js/bootstrap.js')}}"></script>
 <script src="{{url('js/bootstrap.min.js')}}"></script>
 <script src="{{url('js/diaspora.js')}}"></script>
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#rooms').dataTable();
+    });
+</script>
 </body>
 </html>
