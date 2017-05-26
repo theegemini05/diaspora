@@ -9,12 +9,14 @@
 namespace App\Http\Controllers;
 
 use App\ApprovedBooking;
+use App\OccupiedRooms;
 use App\RegisterHostel;
 use App\RegisterHostelRooms;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use App\HostelRooms;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
@@ -71,11 +73,23 @@ class RegisterHostelRoomsController extends Controller
     {
         $hostel = RegisterHostel::findorFail($hostel_id);
         $hostel['rooms'] = RegisterHostelRooms::where('hostel_id', $hostel_id)->get();
+       // foreach($hostel)
         $roomdetails = RegisterHostelRooms::where('hostel_id', $hostel_id)->get();
+        foreach($roomdetails as $roomdetail) {
+            $roomdetail['occupied'] = OccupiedRooms::where('room_id', $roomdetail->id)->get();
+            $roomdetail['current_capacity'] = OccupiedRooms::where('room_id', $roomdetail->id)->count();
+            $roomdetail['percent'] = ($roomdetail->current_capacity/$roomdetail->capacity)*100;
+        }
+       // $join = DB::table('register_hostel_rooms')->join('occupied_rooms', 'register_hostel_rooms.id', '=', 'occupied_rooms.room_id')->get();
+        /*$add = DB::table('register_hostel_rooms')->join('occupied_rooms', 'register_hostel_rooms.id', '=', 'occupied_rooms.room_id')->count();*/
+            /*$per = $rd->currentcapacity/$rd->capacity;*/
+        /*}*/
         if(!Auth::guest()){
             $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         }
-        return view('tour', compact('hostel', 'app', 'roomdetails'));
+
+        //dd($join);
+        return view('tour', compact('hostel', 'app', 'roomdetails', 'capacity', 'per', 'join', 'cal'));
     }
 
     public function about($hostel_id)

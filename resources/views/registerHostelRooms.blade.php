@@ -45,7 +45,7 @@
             <center><h2>Register Room to {{$hostel->hname}} Hostels</h2></center>
         </div>
     </div>
-<div class="container" id="login" style="height: 380px; margin-top: 50px;">
+<div class="container" id="login" style="height: 480px; margin-top: 50px;">
     <center><img src="{{url('images/hostel.jpg')}}"></center>
     <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/registerhostelrooms') }}">
         {{ csrf_field() }}
@@ -68,9 +68,21 @@
             </div>
         </div>
 
-        <div class="form-group{{ $errors->has('pics') ? ' has-error' : '' }}" id="input">
+        <div class="form-group{{ $errors->has('capacity') ? ' has-error' : '' }}" id="input">
+            <div class="col-md-6 name">
+                <input style="border: 1px solid #fed136;" id="pics" type="text" class="form-control" name="capacity" value="{{ old('capacity') }}" placeholder="Room Capacity(Persons)" required autofocus>
+
+                @if ($errors->has('capacity'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('capacity') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group{{ $errors->has('rent') ? ' has-error' : '' }}" id="input">
             <div class="col-md-6 rent">
-                <input style="border: 1px solid #fed136;" id="pics" type="text" class="form-control" name="rent" value="{{ old('rent') }}" placeholder="Hostel Rent" required autofocus>
+                <input style="border: 1px solid #fed136;" id="pics" type="text" class="form-control" name="rent" value="{{ old('rent') }}" placeholder="Hostel_Room Rent" required autofocus>
 
                 @if ($errors->has('rent'))
                     <span class="help-block">

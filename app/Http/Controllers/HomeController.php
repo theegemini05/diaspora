@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ApprovedBooking;
 use App\BookedRooms;
 use App\ContactedLandlord;
+use App\OccupiedRooms;
 use App\RegisterHostel;
 use App\RegisterHostelRooms;
 use App\User;
@@ -68,7 +69,7 @@ class HomeController extends Controller
         /*$reply = Reply::where('user_id', Auth::user()->id)->get();*/
         $gets =  RegisterHostelRooms::findorFail($room_id);
         $ret = BookedRooms::findorFail($book_id);
-        return view('ackBooking', compact('hostels', 'hostel', 'gets','ret', 'get', 'message', 'reply', 'app'));
+        return view('ackBooking', compact('hostels', 'hostel', 'gets','ret', 'get', 'message', 'reply', 'app', 'roomdetails'));
     }
 
     public function message($hostel_id, $message_id, $user_id){
@@ -156,9 +157,43 @@ class HomeController extends Controller
         $acceptroom =ApprovedBooking::findorFail($approve_id);
         $roomdetails = RegisterHostelRooms::findorFail($room_id);
         $hosteldetails = RegisterHostel::findorFail($hostel_id);
-        /*dd($hosteldetails);*/
+        $occupieddetails = OccupiedRooms::where('room_id', $room_id)->get();
         $bookdetails = BookedRooms::findorFail($book_id);
         $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
-        return view('acceptRoom', compact('acceptroom', 'roomdetails', 'hosteldetails', 'bookdetails', 'app'));
+        return view('acceptRoom', compact('acceptroom', 'roomdetails', 'hosteldetails', 'bookdetails', 'app', 'occupieddetails'));
+    }
+
+    public function occupied(Request $request){
+        $update_rooms = RegisterHostelRooms::findorFail($request->room_id);
+        //dd($update_rooms->currentcapacity);
+        $update_rooms->update(['currentcapacity'=>$update_rooms->currentcapacity+1]);
+        $occupied = new OccupiedRooms($request->all());
+        $occupied['user_id'] = Auth::user()->id;
+        $occupied['room_id'] = $request->room_id;
+        $occupied->save();
+
+
+        return redirect()->action('HomeController@acceptRoom', [$request->hostel_id,$request->room_id,$request->book_id,$request->approve_id])
+            ->with('messages', 'You are now an occupant of the room');
+    }
+
+    public function updater($hostel_id, $room_id, $book_id, $approve_id){
+        $hosteldetails = RegisterHostel::findorFail($hostel_id);
+        $bookdetails = BookedRooms::findorFail($book_id);
+        $roomdetails =  RegisterHostelRooms::findorFail($room_id);
+        $acceptroom = ApprovedBooking::findorFail($approve_id);
+        $updater = DB::update('update register_hostel_rooms set status = 2 where id = ? and hostel_id=?', [$room_id, $hostel_id]);
+        $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        return view('acceptRoom', compact('updater', 'hosteldetails', 'bookdetails', 'roomdetails', 'acceptroom', 'app'));
+    }
+
+    public function decliner($hostel_id, $room_id, $book_id, $approve_id){
+        $hosteldetails = RegisterHostel::findorFail($hostel_id);
+        $bookdetails = BookedRooms::findorFail($book_id);
+        $roomdetails =  RegisterHostelRooms::findorFail($room_id);
+        $acceptroom = ApprovedBooking::findorFail($approve_id);
+        $updater = DB::update('update register_hostel_rooms set status = 0 where id = ? and hostel_id=?', [$room_id, $hostel_id]);
+        $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        return view('acceptRoom', compact('updater', 'hosteldetails', 'bookdetails', 'roomdetails', 'acceptroom', 'app'));
     }
 }

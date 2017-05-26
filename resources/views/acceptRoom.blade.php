@@ -27,7 +27,7 @@
         }
 
         #map-canvas {
-            width: 1100px;
+            width: 1130px;
             height: 400px;
         }
     </style>
@@ -52,6 +52,12 @@
                 <strong><center>{{ session('message') }}</center></strong>
             </div>
         @endif
+            @if (session('messages'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong><center>{{ session('messages') }}</center></strong>
+                </div>
+            @endif
 
         <center><h2 style="margin-bottom: 30px; border-bottom: 2px solid #fed136;">Room Acceptance Prompt for Room {{$roomdetails->rno}} in {{$hosteldetails->hname}} Hostels</h2></center>
 
@@ -59,11 +65,41 @@
 
             </div>
 
-        <div class="col-lg-6">
-            <center><td><button class="btn btn-lg btn-success" type="submit" style="width: 300px; margin-top: 25px;">Accept Room <i class="fa fa-check"></i></button></td></center>
-        </div>
+        <form method="post" action="{{url('/home/occupied')}}">
+            {{ csrf_field() }}
+
+            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+            <input type="hidden" name="room_id" value="{{$roomdetails->id}}">
+            <input type="hidden" name="hostel_id" value="{{$hosteldetails->id}}">
+            <input type="hidden" name="book_id" value="{{$bookdetails->id}}">
+            <input type="hidden" name="approve_id" value="{{$acceptroom->id}}">
+
+            {{--@if( isset($occupieddetails))--}}
+                {{--@foreach($occupieddetails as $occupied)--}}
+                        <div class="col-lg-6">
+                            <center><button href="{{url('/home/accept/'.$hosteldetails->id.'/'.$roomdetails->id.'/'.$bookdetails->id.'/'.$acceptroom->id)}}" class="btn btn-lg btn-success" type="submit" style="width: 300px; margin-top: 25px;" @if($roomdetails->capacity == $roomdetails->currentcapacity) disabled @endif>Accept Room <i class="fa fa-check"></i></button></center>
+                        </div>
+
+
+                    {{--@if($occupied->room_id == $roomdetails->id && !($roomdetails->capacity == $roomdetails->currentcapacity))--}}
+
+                    {{--@endif--}}
+                {{--@endforeach--}}
+            {{--@else
+            @endif--}}
+            {{--<div class="col-lg-6">
+                <center><button href="{{url('/home/accept/'.$hosteldetails->id.'/'.$roomdetails->id.'/'.$bookdetails->id.'/'.$acceptroom->id)}}" class="btn btn-lg btn-success" type="submit" style="width: 300px; margin-top: 25px;">Accept Room <i class="fa fa-check"></i></button></center>
+            </div>--}}
+        </form>
+            {{--@if(isset($occupieddetails))
+                @foreach($occupieddetails as $vacancy)
+                    @if($occupied->room_id == $roomdetails->id)--}}
+
+                {{--    @endif
+                @endforeach
+            @endif--}}
             <div class="col-lg-6">
-                <center><td><button class="btn btn-lg btn-danger" style="width: 300px; margin-top: 25px;">Reject Room <i class="fa fa-times"></i></button></td></center>
+                <center><td><a href="{{url('/home/decline/'.$hosteldetails->id.'/'.$roomdetails->id.'/'.$bookdetails->id.'/'.$acceptroom->id)}}" class="btn btn-lg btn-danger" style="width: 300px; margin-top: 25px;" @if($roomdetails->capacity == $roomdetails->currentcapacity) disabled @endif>Reject Room <i class="fa fa-times"></i></a></td></center>
             </div>
         </div>
     </div>

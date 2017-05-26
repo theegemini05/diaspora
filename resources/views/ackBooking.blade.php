@@ -84,7 +84,11 @@
                         <input type="hidden" name="book_id" value="{{$ret->id}}">
                         {{--<input type="hidden" name="message_id" value="{{$messages->id}}">--}}
                     <div class="col-lg-6">
-                        <center><td><button class="btn btn-lg btn-success" type="submit" style="width: 250px;" href="{{url('/home/approvebooking/'.$gets->hostel_id.'/'.$gets->id.'/'.$ret->id)}}">Approve Request <i class="fa fa-check"></i></button></td></center>
+                        @if($gets->currentcapacity == $gets->capacity)
+                            <center><td><button class="btn btn-lg btn-success" type="submit" style="width: 250px;" href="" disabled>Approve Request <i class="fa fa-check"></i></button></td></center>
+                        @else
+                            <center><td><button class="btn btn-lg btn-success" type="submit" style="width: 250px;" href="{{url('/home/approvebooking/'.$gets->hostel_id.'/'.$gets->id.'/'.$ret->id)}}">Approve Request <i class="fa fa-check"></i></button></td></center>
+                        @endif
                     </div>
                     </form>
                     <form role="form" method="POST" action="{{ url('/home/declinebooking') }}">
@@ -101,7 +105,11 @@
                         <input type="hidden" name="book_id" value="{{$ret->id}}">
                         {{--<input type="hidden" name="message_id" value="{{$messages->id}}">--}}
                         <div class="col-lg-6">
-                            <center><td><button class="btn btn-lg btn-danger" style="width: 250px;">Disapprove Request <i class="fa fa-times"></i></button></td></center>
+                            @if($gets->currentcapacity == $gets->capacity)
+                                <center><td><button class="btn btn-lg btn-danger" style="width: 250px;" disabled>Disapprove Request <i class="fa fa-times"></i></button></td></center>
+                            @else
+                                <center><td><button class="btn btn-lg btn-danger" style="width: 250px;">Disapprove Request <i class="fa fa-times"></i></button></td></center>
+                            @endif
                         </div>
                     </form>
                 </div>

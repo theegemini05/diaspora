@@ -17,7 +17,9 @@ class CreateRegisterHostelRoomsTable extends Migration
             $table->increments('id');
             $table->integer('hostel_id')->unsigned()->index();
             $table->integer('rno');
+            $table->integer('capacity(persons)');
             $table->string('rent');
+            $table->string('currentcapacity(persons)')->default(0);
             $table->boolean('status')->default(0);
             $table->timestamps();
 
