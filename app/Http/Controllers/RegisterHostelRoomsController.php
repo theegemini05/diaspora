@@ -43,24 +43,12 @@ class RegisterHostelRoomsController extends Controller
 
     public function store(Request $request)
     {
-        /*$this->validate($request, [
-            //'rno' => 'required|number',
-            'pics' => 'mimes:jpeg,jpg,png|max:10000'
+        $this->validate($request, [
+            'rno' => 'required|numeric|min:1',
+            'capacity' => 'required|numeric|min:1',
+            'rent' => 'required|numeric|min:100'
+
         ]);
-        //save user to db
-        $hostelrooms = new HostelRooms($request->all());
-        if ($request->pics != null) {
-            $file = Input::file('pics');
-
-            $originname = $file->getClientOriginalName();
-
-            $filename = pathinfo($originname, PATHINFO_FILENAME);
-            $extension = pathinfo($originname, PATHINFO_EXTENSION);
-            $name = $filename . '.' . time() . '.' . $extension;
-
-            Input::file('pics')->move(public_path() . '/photos/', $name);
-        }*/
-        /*$hostelrooms['pics'] = $name;*/
         $hostelrooms = new RegisterHostelRooms($request->all());
         $hostelrooms->save();
 
@@ -77,7 +65,7 @@ class RegisterHostelRoomsController extends Controller
         $roomdetails = RegisterHostelRooms::where('hostel_id', $hostel_id)->get();
         foreach($roomdetails as $roomdetail) {
             $roomdetail['occupied'] = OccupiedRooms::where('room_id', $roomdetail->id)->get();
-            $roomdetail['current_capacity'] = OccupiedRooms::where('room_id', $roomdetail->id)->count();
+            $roomdetail['current_capacity'] = OccupiedRooms::where('room_id', $roomdetail->id)->where('status', 1)->count();
             $roomdetail['percent'] = ($roomdetail->current_capacity/$roomdetail->capacity)*100;
         }
        // $join = DB::table('register_hostel_rooms')->join('occupied_rooms', 'register_hostel_rooms.id', '=', 'occupied_rooms.room_id')->get();

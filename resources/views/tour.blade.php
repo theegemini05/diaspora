@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="{{url('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url('/css/bootstrap-theme.min.css')}}">
     <link rel="stylesheet" href="{{url('/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{url('/css/jquery.dataTables.min.css')}}">
+    <link rel="stylesheet" href="{{url('/css/jquery.dataTables.min.css')}}">\
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="{{url('/css/yamm.css')}}">
 
@@ -85,8 +89,8 @@
                     <tr>
                         <td>{{$data->rno}}</td>
                         <td>{{$data->rent}}</td>
-                        @if($data->status == 1)
-                            <td>Booked</td>
+                        @if($data->capacity == $data->currentcapacity)
+                            <td>Full</td>
                         @else
                             <td>Vacant</td>
                         @endif
@@ -118,7 +122,7 @@
                         @if($data->percent == 100)
                             <td><button class="btn" style="background-color: rgba(242, 242, 242, 0); color: #fed136; border: 2px solid #000000; width: 200px;" disabled>Fully Occupied</button></td>
                         @else
-                            <td><a @if(!Auth::guest()) href="{{url('/book/'.$hostel->id.'/'.$data->id)}}" @else href="{{url('/login')}}" @endif class="btn" style="background-color: #fed136; color: #000000; border: 2px solid #000000; width: 200px;">Book Room</a></td>
+                            <td><a @if(!Auth::guest()) href="{{url('home/book/'.$hostel->id.'/'.$data->id)}}" @else href="{{url('/login')}}" @endif class="btn" style="background-color: #fed136; color: #000000; border: 2px solid #000000; width: 200px;">Book Room</a></td>
                         @endif
                     </tr>
                 @endforeach

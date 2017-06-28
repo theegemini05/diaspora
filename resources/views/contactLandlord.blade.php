@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="{{url('/css/bootstrap-theme.min.css')}}">
     <link rel="stylesheet" href="{{url('/css/font-awesome.min.css')}}">
 
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" href="{{url('/css/yamm.css')}}">
 
     <link rel="stylesheet" href="{{url('/css/diaspora.css')}}">
@@ -34,7 +39,7 @@
         <div class="row">
             <br><br>
             <div class="col-md-8">
-                 <h3 style="color: #fed136;">Send a Message to Landlord {{$get->hname}}</h3>
+                 <h3 style="color: #fed136;">Send a Message to Landlord {{$gets->hname}}</h3>
                  <form role="form" method="POST" action="{{ url('/contactlandlord') }}">
                      {{ csrf_field() }}
 
@@ -49,8 +54,8 @@
                      <input type="hidden" name="email" value="{{$user->email}}">
                      <input type="hidden" name="pnumber" value="{{$user->p_number}}">
                      <input type="hidden" name="user_id" value="{{$user->id}}">
-                     <input type="hidden" name="landlord_id" value="{{$get->landlord_id}}">
-                     <input type="hidden" name="hostel_id" value="{{$get->id}}">
+                     <input type="hidden" name="landlord_id" value="{{$gets->landlord_id}}">
+                     <input type="hidden" name="hostel_id" value="{{$gets->id}}">
                      {{--<div class="form-group control-group">
                          <div class="controls contact name">
                              <input style="border: 1px solid #fed136;" type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name." placeholder="Enter Your Name(s)">

@@ -31,8 +31,11 @@
                                             <ul class="col-lg-12 list-unstyled places">
                                                 <li class="head"><h1 style="text-align: center; border-bottom: 2px solid #fed136;">landlord {{ Auth::user()->lname }} priviledges</h1></li>
                                             </ul>
-                                            <ul class="col-md-12 list-unstyled places">
-                                                <center><li><a class="hders" href="{{url('/registerhostel')}}">Register Hostel</a></li></center>
+                                            <ul class="col-md-6 list-unstyled places">
+                                                <center><li><a class="hders" href="{{url('home/registerhostel')}}">Register Hostel</a></li></center>
+                                            </ul>
+                                            <ul class="col-md-6 list-unstyled places">
+                                                <center><li><a class="hders" href="{{url('/home/vacaterooms')}}">Vacate Rooms</a></li></center>
                                             </ul>
                                         </div>
                                     </div>
@@ -40,41 +43,6 @@
                             </ul>
                         </li>
                     @endif
-                @endif
-
-                @if(!Auth::guest()  && Auth::user()->role == 'Landlord')
-                        <li class="dropdown yamm-fw">
-                        </li>
-                @else
-                    <li class="dropdown yamm-fw">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <i class="fa fa-puzzle-piece"></i></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <div class="yamm-content">
-                                <div class="row">
-                                    <ul class="col-lg-12 list-unstyled">
-                                        <li class="head"><h1 style="text-align: center; border-bottom: 2px solid #fed136;"><strong>diaspora hostels at egerton university njoro</strong></h1></li>
-                                    </ul>
-                                    <ul class="col-md-3 list-unstyled places">
-                                        <li><a class="hders" onclick="openNavAboutNjokerio()">Njokerio Region</a></li>
-                                    </ul>
-
-                                    <ul class="col-md-3 list-unstyled places">
-                                        <li><a class="hders" onclick="openNavAboutRight()">Right Region</a></li>
-                                    </ul>
-
-                                    <ul class="col-md-3 list-unstyled places">
-                                        <li><a class="hders" onclick="openNavAboutBooster()">Booster Region</a></li>
-                                    </ul>
-
-                                    <ul class="col-md-3 list-unstyled places">
-                                        <li><a class="hders" onclick="openNavAboutCarWash()">Carwash Region</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
                 @endif
 
                 @if(!Auth::guest() && Auth::user()->role == 'Landlord')
@@ -161,7 +129,7 @@
                                 <div class="yamm-content">
                                     <div class="row">
                                     @if(isset($get))
-                                        @if(!Auth::guest() && Auth::user()->role == "Landlord")
+                                        @if(!Auth::guest() && Auth::user()->role == "Landlord" || !Auth::user()->active == 2)
                                         @foreach($get as $notify)
                                         <ul class="col-lg-12 list-unstyled places">
                                             @if($notify->landlord_id == Auth::user()->id)
@@ -177,7 +145,7 @@
                                     @endif
 
                                     @if(isset($app))
-                                            @if(!Auth::guest() && Auth::user()->role == "User")
+                                            @if(!Auth::guest() && Auth::user()->role == "Client")
                                                 @foreach($app as $rove)
                                                     <ul class="col-lg-12 list-unstyled places">
                                                         @if($rove->user_id == Auth::user()->id)
@@ -228,6 +196,20 @@
                                                     @endforeach
                                                 {{--@endif--}}
                                             @endif
+
+                                                @if(isset($adminchat))
+                                                    {{--@if(!Auth::guest() && Auth::user()->role == "Landlord")--}}
+                                                    @foreach($adminchat as $chat)
+                                                        <ul class="col-lg-12 list-unstyled places">
+                                                            @if(Auth::user()->active == 2)
+                                                                <center><li class="messages"><a class="hders" style="font-size: 15px;" href="{{url('/home/messagelandlord/'.$chat->id)}}">{{$chat->name}} sent a message<i style="margin-left: 620px;">{{$chat->created_at}}</i></a></li></center>
+                                                            @else
+                                                                <li></li>
+                                                            @endif
+                                                        </ul>
+                                                    @endforeach
+                                                    {{--@endif--}}
+                                                @endif
                                             {{--@if(isset($reply))
                                                 @if(!Auth::guest() && Auth::user()->role == "User")
                                                     @foreach($reply as $ripoti)
@@ -278,11 +260,11 @@
                                 <div class="yamm-content">
                                     <div class="row">
                                         <ul class="col-lg-12 list-unstyled places">
-                                            <center><a class="hders" style="text-decoration: none;" href="{{ url('/logout') }}"
-                                               onclick="event.preventDefault();
+                                            <center><li><a class="hders" style="text-decoration: none;" href="{{ url('/logout') }}"
+                                                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                                Logout {{ Auth::user()->lname }} <i class="fa fa-sign-out"></i>
-                                            </a></center>
+                                                        Logout {{ Auth::user()->lname }} <i class="fa fa-sign-out"></i>
+                                                    </a></li></center>
 
                                             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                                 {{ csrf_field() }}

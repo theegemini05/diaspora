@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="{{url('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url('/css/bootstrap-theme.min.css')}}">
     <link rel="stylesheet" href="{{url('/css/font-awesome.min.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="{{url('/css/yamm.css')}}">
 
@@ -58,21 +62,12 @@
                 <p><i class="fa fa-envelope-o"></i>
                     <abbr title="Email Address">E</abbr>: <a style="color: #fed136;" href="mailto:{{$ret->email}}">{{$ret->email}}</a>
                 </p>
-
-                <ul class="list-unstyled list-inline list-social-icons">
-                    <li><a style="color: #fed136;" href="{{url('#')}}"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-                    <li><a style="color: #fed136;" href="{{url('#')}}"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-                    <li><a style="color: #fed136;" href="{{url('#')}}"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
-                    <li><a style="color: #fed136;" href="{{url('#')}}"><i class="fa fa-instagram fa-2x"></i></a></li>
-                    <li><a style="color: #fed136;" href="{{url('#')}}"><i class="fa fa-snapchat fa-2x"></i></a></li>
-                    <li><a style="color: #fed136;" href="{{url('#')}}"><i class="fa fa-whatsapp fa-2x"></i></a></li>
-                </ul>
             </div>
         </div><br><br>
 
         <div class="row">
             <div class="col-lg-12">
-                <center><a class="btn btn-lg" style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 570px;" @if(Auth::guest())href="{{url('/login')}} @else href="{{url('contactlandlord/'.$hostel->id)}}" @endif">Send message to landlord {{$hostel->hname}} hostels</a></center>
+                <center><a class="btn btn-lg" style="background-color: #fed136;color: #222222;border: 2px solid #222222; width: 570px;" @if(Auth::guest())href="{{url('/login')}} @else href="{{url('/home/contactlandlord/'.$hostel->id)}}" @endif">Send message to landlord {{$hostel->hname}} hostels</a></center>
             </div>
         </div><br><br>
 

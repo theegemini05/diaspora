@@ -47,7 +47,7 @@
                                 <select style="border: 1px solid #fed136;" id="name" class="form-control" name="role">
                                     <option value="" selected disabled>Your Role in Diaspora</option>
                                     <option value="Landlord">Landlord</option>
-                                    <option value="User">Client</option>
+                                    <option value="Client">Client</option>
                                 </select>
 
                                 @if ($errors->has('role'))

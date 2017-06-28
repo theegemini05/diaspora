@@ -39,8 +39,8 @@ class RegisterHostelController extends Controller
         $request['landlord_id'] = Auth::user()->id;
 
         $this->validate($request, [
-            'hname' => 'required',
-            'hregion' => 'required',
+            'hname' => 'required|alphanum|min:2',
+            'hregion' => 'required|string|min:2',
             'address' => 'required',
             'pics' => 'mimes:jpeg,jpg,png|max:20000',
             'lat' => 'required',

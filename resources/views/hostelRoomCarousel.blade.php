@@ -9,9 +9,9 @@
         <div class="item active">
             @if($hostel->rooms = $room)
             <img src="{{url('photos/'.$room->pics)}}", class="caro">
-            <div class="carousel-caption">
+            {{--<div class="carousel-caption">
                 <h2>Egerton Main Graduation Square</h2>
-            </div>
+            </div>--}}
             @endif
         </div>
 

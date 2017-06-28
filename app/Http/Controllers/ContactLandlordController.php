@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\ApprovedBooking;
+use App\BookedRooms;
 use App\ContactedLandlord;
 use App\RegisterHostel;
 use Illuminate\Foundation\Auth\User;
@@ -20,8 +21,7 @@ class ContactLandlordController extends Controller
 {
     public function __construct()
     {
-        /* $this->middleware('auth');*/
-        $njokerio = RegisterHostel::where("hregion","Njokerio")->get();
+        $njokerio = RegisterHostel::where("hregion", "Njokerio")->get();
         View::share("njokerio", $njokerio);
         $right = RegisterHostel::where("hregion", "Right")->get();
         View::share("right", $right);
@@ -29,9 +29,6 @@ class ContactLandlordController extends Controller
         View::share("booster", $booster);
         $carwash = RegisterHostel::where("hregion", "Carwash")->get();
         View::share("carwash", $carwash);
-        /*$get =  BookRoom::where('landlord_id', Auth::user()->id)->get();
-        dd($get);
-        View::share("get", $get);*/
     }
 
     /**
@@ -40,11 +37,14 @@ class ContactLandlordController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function message($hostel_id){
-        $get = RegisterHostel::findorFail($hostel_id);
+        $gets = RegisterHostel::findorFail($hostel_id);
+        $get = BookedRooms::where('landlord_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         $user = User::findorFail(Auth::user()->id);
-        $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        if(!Auth::guest()){
+            $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        }
         /*dd($user);*/
-        return view('contactLandlord', compact('get', 'user', 'app'));
+        return view('contactLandlord', compact('get', 'user', 'app', 'gets'));
     }
 
     public function store(Request $request)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ApprovedBooking;
 use App\BookedRooms;
+use App\ContactAdmin;
 use App\ContactedLandlord;
 use App\OccupiedRooms;
 use App\RegisterHostel;
@@ -33,9 +34,6 @@ class HomeController extends Controller
         View::share("booster", $booster);
         $carwash = RegisterHostel::where("hregion", "Carwash")->get();
         View::share("carwash", $carwash);
-        /*$get =  BookRoom::where('landlord_id', Auth::user()->id)->get();
-        dd($get);
-        View::share("get", $get);*/
     }
 
     /**
@@ -45,25 +43,70 @@ class HomeController extends Controller
      */
     public function index()
     {
-        /*$app = ApproveBookings::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();*/
-        return view('index');
+        if(!Auth::guest()){
+            $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        }
+        return view('landingpage', compact('app'));
     }
 
     public function hostel(){
         $hostels = RegisterHostel::where('landlord_id', Auth::user()->id)->get();
-        /*dd($hostels);*/
+        foreach($hostels as $nyumba){
+            $nyumba['rooms'] = RegisterHostelRooms::where('hostel_id', $nyumba->id)->get();
+            foreach($nyumba['rooms'] as $vacate){
+                $nyumba['cap'] = OccupiedRooms::where('room_id', $vacate->id)->get();
+            }
+        }
         $get =  BookedRooms::where('landlord_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
-        $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        if(!Auth::guest()){
+            $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        }
+        $admin = DB::select('select * from users where active=1 or active=0');
+        $count = User::where('active', 1)->orWhere('active', 0)->count();
+        $buru = RegisterHostel::all()->count();
+        $midways = RegisterHostelRooms::all()->count();
+        $watu = OccupiedRooms::where('status', 1)->count();
+        $requests = BookedRooms::all()->count();
+        $appRequests = ApprovedBooking::where('status', 1)->count();
+        $text = ContactedLandlord::all()->count();
         $message = ContactedLandlord::where('landlord_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        $vacates = OccupiedRooms::where('status', 0)->count();
+        $adminchat = ContactAdmin::all();
         /*$reply = Reply::where('user_id', Auth::user()->id)->get();*/
         /*dd($reply[0]);*/
-        return view('index', compact('hostels', 'get', 'message', 'reply', 'app'));
+        return view('index', compact('hostels', 'get', 'message', 'reply', 'app', 'admin', 'adminchat', 'count', 'buru', 'midways', 'watu', 'requests', 'appRequests', 'text', 'vacates'));
+    }
+
+    public function applandlord($user_id){
+        $admin = DB::select('select * from users where active=1 or active=0');
+        $update = DB::update('update users set active = 1 where id = ?', [$user_id]);
+        return redirect()->action('HomeController@hostel')
+            ->with('habari', 'Booking Request has been approved');
+    }
+
+    public function vacate(){
+        $hostels = RegisterHostel::where('landlord_id', Auth::user()->id)->get();
+        //dd($hostels[0]->rooms[0]->occupiedrooms[0]->user);
+        return view('vacateRoom', compact('hostels'));
+    }
+
+    public function emptyroom($room_id, $user_id){
+        $empty_rooms = RegisterHostelRooms::findorFail($room_id);
+        $empty_rooms->update(['currentcapacity'=>$empty_rooms->currentcapacity-1]);
+        $vacate_rooms = OccupiedRooms::where('user_id', $user_id)->where('room_id', $room_id)->where('status', 1)->first();
+        $vacate_rooms->update(['status'=>0]);
+
+
+        return redirect()->action('HomeController@vacate')
+            ->with('vacate', 'Room Vacated!');
     }
 
     public function acknowledge($hostel_id, $room_id, $book_id){
         $hostels = RegisterHostel::where('landlord_id', Auth::user()->id)->get();
         $get =  BookedRooms::where('landlord_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
-        $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        if(!Auth::guest()){
+            $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        }
         $hostel = RegisterHostel::findorFail($hostel_id);
         $message = ContactedLandlord::where('landlord_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         /*$reply = Reply::where('user_id', Auth::user()->id)->get();*/
@@ -75,7 +118,9 @@ class HomeController extends Controller
     public function message($hostel_id, $message_id, $user_id){
         $hostels = RegisterHostel::where('landlord_id', Auth::user()->id)->get();
         $get = BookedRooms::where('landlord_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
-        $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        if(!Auth::guest()){
+            $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        }
         $message = ContactedLandlord::where('landlord_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         /*dd($message);*/
         $hostel = RegisterHostel::findorFail($hostel_id);
@@ -107,6 +152,22 @@ class HomeController extends Controller
         //return success message to page
         return redirect()->action('HomeController@message', [$request->hostel_id,$request->message_id,$request->user_id])
             ->with('status', $request->fname.' '.$request->lname.' successfully sent reply.');
+    }
+
+
+    public function adminchat(Request $request)
+    {
+        //save user to db
+        $message = new ContactAdmin($request->all());
+        $message['name'] = $request->name;
+        $message['email'] = $request->email;
+        $message['pnumber'] = $request->p_number;
+        $message['message'] = $request->message;
+        $message->save();
+
+        //return success message to page
+        return redirect()->action('HomeController@index')
+            ->with('status', $request->fname.' '.$request->lname.' successfully sent message to admin.');
     }
 
     public function update($hostel_id, $room_id, $book_id){
@@ -159,7 +220,9 @@ class HomeController extends Controller
         $hosteldetails = RegisterHostel::findorFail($hostel_id);
         $occupieddetails = OccupiedRooms::where('room_id', $room_id)->get();
         $bookdetails = BookedRooms::findorFail($book_id);
-        $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        if(!Auth::guest()){
+            $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        }
         return view('acceptRoom', compact('acceptroom', 'roomdetails', 'hosteldetails', 'bookdetails', 'app', 'occupieddetails'));
     }
 
@@ -183,7 +246,9 @@ class HomeController extends Controller
         $roomdetails =  RegisterHostelRooms::findorFail($room_id);
         $acceptroom = ApprovedBooking::findorFail($approve_id);
         $updater = DB::update('update register_hostel_rooms set status = 2 where id = ? and hostel_id=?', [$room_id, $hostel_id]);
-        $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        if(!Auth::guest()){
+            $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        }
         return view('acceptRoom', compact('updater', 'hosteldetails', 'bookdetails', 'roomdetails', 'acceptroom', 'app'));
     }
 
@@ -193,7 +258,44 @@ class HomeController extends Controller
         $roomdetails =  RegisterHostelRooms::findorFail($room_id);
         $acceptroom = ApprovedBooking::findorFail($approve_id);
         $updater = DB::update('update register_hostel_rooms set status = 0 where id = ? and hostel_id=?', [$room_id, $hostel_id]);
-        $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        if(!Auth::guest()){
+            $app = ApprovedBooking::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        }
         return view('acceptRoom', compact('updater', 'hosteldetails', 'bookdetails', 'roomdetails', 'acceptroom', 'app'));
+    }
+
+    public function listusers(){
+        $admin = User::where('active', 1)->orWhere('active', 0)->get();
+        return view('userlist', compact('admin'));
+    }
+
+    public function listhostels(){
+        $buru = RegisterHostel::all();
+        return view('hostellist', compact('buru'));
+    }
+
+    public function listrooms(){
+        $midways = RegisterHostelRooms::all();
+        return view('roomslists', compact('midways'));
+    }
+
+    public function listoccupancy(){
+        $watu = OccupiedRooms::where('status', 1)->get();
+        return view('occupantslist', compact('watu'));
+    }
+
+    public function listbooked(){
+        $booked = BookedRooms::all();
+        return view('listbooked', compact('booked'));
+    }
+
+    public function listapproved(){
+        $approvedRequests = ApprovedBooking::where('status', 1)->get();
+        return view('approvedLists', compact('approvedRequests'));
+    }
+
+    public function listvacated(){
+        $roomVacated = OccupiedRooms::where('status', 0)->get();
+        return view('vacateList', compact('roomVacated'));
     }
 }

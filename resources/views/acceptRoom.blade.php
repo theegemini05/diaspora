@@ -17,6 +17,11 @@
 
     <link rel="stylesheet" href="{{url('css/sidenav.css')}}">
 
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
     <link rel="icon" href="{{url('images/eger.png')}}">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDRhnfi6S1AIFzmzT7mL7ETM0SugFuQ7c&libraries=places" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -99,7 +104,7 @@
                 @endforeach
             @endif--}}
             <div class="col-lg-6">
-                <center><td><a href="{{url('/home/decline/'.$hosteldetails->id.'/'.$roomdetails->id.'/'.$bookdetails->id.'/'.$acceptroom->id)}}" class="btn btn-lg btn-danger" style="width: 300px; margin-top: 25px;" @if($roomdetails->capacity == $roomdetails->currentcapacity) disabled @endif>Reject Room <i class="fa fa-times"></i></a></td></center>
+                <center><td><a href="{{url('/home')}}" class="btn btn-lg btn-danger" style="width: 300px; margin-top: 25px;" @if($roomdetails->capacity == $roomdetails->currentcapacity) disabled @endif>Reject Room <i class="fa fa-times"></i></a></td></center>
             </div>
         </div>
     </div>

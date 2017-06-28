@@ -9,9 +9,9 @@
     <div class="carousel-inner" role="listbox" style="max-height: 400px !important;">
         <div class="item active">
             <img src="{{url('photos/'.$hostel->pics)}}", class="caro">
-            <div class="carousel-caption">
+            {{--<div class="carousel-caption">
                 <h2>Egerton Main Graduation Square</h2>
-            </div>
+            </div>--}}
         </div>
 {{--
         <div class="item">
